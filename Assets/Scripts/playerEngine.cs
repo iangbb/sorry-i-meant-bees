@@ -26,13 +26,13 @@ public class playerEngine : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(left))
-            rb.AddForce(-1 * rb.transform.right * force);
+            rb.AddForce(new Vector3(-1, 0, 0) * force);
         if (Input.GetKey(right))
-            rb.AddForce(rb.transform.right * force);
+            rb.AddForce(new Vector3(1, 0, 0) * force);
         if (Input.GetKey(up))
-            rb.AddForce(rb.transform.up * force);
+            rb.AddForce(new Vector3(0, 1, 0) * force);
         if (Input.GetKey(down))
-            rb.AddForce(-1 * rb.transform.up * force);
+            rb.AddForce(new Vector3(0, -1, 0) * force);
 
         age += (1 / (rb.velocity.magnitude + 1)) * Time.deltaTime;
     }
