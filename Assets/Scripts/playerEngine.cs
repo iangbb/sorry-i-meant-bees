@@ -29,4 +29,9 @@ public class playerEngine : MonoBehaviour
 
         age += (1 / (rb.velocity.magnitude + 1)) * Time.deltaTime;
     }
+
+    public float getAge()
+    {
+        return age;
+    }
 }
