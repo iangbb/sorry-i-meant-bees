@@ -6,10 +6,10 @@ public class playerEngine : MonoBehaviour
 {
     // Start is called before the first frame update
     private Rigidbody2D rb;
+    private float age;
 
     public float force;
 
-    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -27,5 +27,6 @@ public class playerEngine : MonoBehaviour
         if (Input.GetKey(KeyCode.DownArrow))
             rb.AddForce(-1 * rb.transform.up * force);
 
+        age += (1 / (rb.velocity.magnitude + 1)) * Time.deltaTime;
     }
 }
