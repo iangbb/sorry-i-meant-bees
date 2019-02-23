@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class JamScript : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,5 +26,4 @@ public abstract class JamScript : MonoBehaviour
     }
 
     public abstract void jamEffect(GameObject player);
-
 }
