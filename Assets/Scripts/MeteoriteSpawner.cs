@@ -55,6 +55,5 @@ public class MeteoriteSpawner : MonoBehaviour
 
             spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval);
         }
-        
     }
 }
