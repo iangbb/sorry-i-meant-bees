@@ -8,6 +8,7 @@ public class player_special_powers : MonoBehaviour
 
     public KeyCode pullKey;
     public KeyCode pushKey;
+    public KeyCode levitateKey;
     public float strength;
 
     // Start is called before the first frame update
@@ -39,6 +40,9 @@ public class player_special_powers : MonoBehaviour
             {
                 addForce(player, strength);
             }
+        } else if (Input.GetKeyDown(levitateKey))
+        {
+
         }
     }
 
@@ -46,6 +50,7 @@ public class player_special_powers : MonoBehaviour
     {
         Vector3 direction = player.transform.position - gameObject.transform.position;
         player.GetComponent<Rigidbody2D>().AddForce(
-            gameObject.GetComponent<playerEngine>().getAge() * force * direction / Mathf.Pow(direction.magnitude, 2));
+            gameObject.GetComponent<playerEngine>().getAge()  * force * direction
+            / (Mathf.Pow(direction.magnitude, 2)) * gameObject.GetComponent<info>().mass);
     }
 }
