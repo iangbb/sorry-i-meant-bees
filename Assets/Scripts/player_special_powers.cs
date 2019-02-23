@@ -45,6 +45,7 @@ public class player_special_powers : MonoBehaviour
     private void addForce(GameObject player, float force)
     {
         Vector3 direction = player.transform.position - gameObject.transform.position;
-        player.GetComponent<Rigidbody2D>().AddForce(force * direction / Mathf.Pow(direction.magnitude, 2));
+        player.GetComponent<Rigidbody2D>().AddForce(
+            gameObject.GetComponent<playerEngine>().getAge() * force * direction / Mathf.Pow(direction.magnitude, 2));
     }
 }
