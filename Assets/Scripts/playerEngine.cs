@@ -42,25 +42,37 @@ public class playerEngine : MonoBehaviour
         bool[] pressed = new bool[] { false, false, false, false };
         Vector2 to_go_vec = new Vector2(0, 0);
 
+        bool nothing = true;
         for (int i = 0; i < arrows.Length; i++) {
             if (Input.GetKey(arrows[i])) {
+                nothing = false;
                 pressed[i] = true;
                 to_go_vec += indications[i];
             }
         }
 
         float to_go_dir = Vector2.Angle(rb.velocity, to_go_vec);
+        Vector3 cross = Vector3.Cross(rb.velocity, to_go_vec);
 
-        if (to_go_dir <= 67.5 || to_go_dir >= 292.5) {
-            anim.SetBool("Up", true);
-        }
-        if (to_go_dir >= 22.5 && to_go_dir <= 157.5)
-        {
-            anim.SetBool("Right", true);
-        }
-        if (to_go_dir <= 202.5 && to_go_dir <= 337.5)
-        {
-            anim.SetBool("Left", true);
+        if (cross.z > 0)
+            to_go_dir = 360 - to_go_dir;
+
+
+
+        if (!nothing) {
+            Debug.Log(to_go_dir);
+            if (to_go_dir <= 67.5 || to_go_dir >= 292.5)
+            {
+                anim.SetBool("Up", true);
+            }
+            if (to_go_dir >= 22.5 && to_go_dir <= 157.5)
+            {
+                anim.SetBool("Right", true);
+            }
+            if (to_go_dir >= 202.5 && to_go_dir <= 337.5)
+            {
+                anim.SetBool("Left", true);
+            }
         }
 
 
