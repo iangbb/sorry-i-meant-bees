@@ -435,7 +435,12 @@ MonoBehaviour:
   minMeteoriteSpeed: 200
   maxMeteoriteSpeed: 500
   totalMeteorsToSpawn: 20
-  meteorite: {fileID: 370257386, guid: b8519c5f905720b49a14c29c931215d0, type: 3}
+  meteorPrefabs:
+  - {fileID: 370257386, guid: b8519c5f905720b49a14c29c931215d0, type: 3}
+  - {fileID: 370257386, guid: ee70f54e6c48a76efa922bddd3a9734b, type: 3}
+  - {fileID: 370257386, guid: 955012c32345a71c7a54f31e4f74b5be, type: 3}
+  - {fileID: 370257386, guid: 33f445462e627996ba668b732f800b3f, type: 3}
+  - {fileID: 370257386, guid: 0a93087e97282fd8484b0de4dbb8862a, type: 3}
   minimumShowerDelay: 30
   maximumShowerDelay: 60
   meteorShowerAlertText: {fileID: 1424162483}
@@ -506,6 +511,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 753281686027351531, guid: 6bb912fcd88b3424181a2eb8d57cf469,
+        type: 3}
+      propertyPath: meteorPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 753281686027351531, guid: 6bb912fcd88b3424181a2eb8d57cf469,
+        type: 3}
+      propertyPath: meteorPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 370257386, guid: b8519c5f905720b49a14c29c931215d0,
+        type: 3}
+    - target: {fileID: 753281686027351531, guid: 6bb912fcd88b3424181a2eb8d57cf469,
+        type: 3}
+      propertyPath: meteorPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 370257386, guid: ee70f54e6c48a76efa922bddd3a9734b,
+        type: 3}
+    - target: {fileID: 753281686027351531, guid: 6bb912fcd88b3424181a2eb8d57cf469,
+        type: 3}
+      propertyPath: meteorPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 370257386, guid: 955012c32345a71c7a54f31e4f74b5be,
+        type: 3}
+    - target: {fileID: 753281686027351531, guid: 6bb912fcd88b3424181a2eb8d57cf469,
+        type: 3}
+      propertyPath: meteorPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 370257386, guid: 33f445462e627996ba668b732f800b3f,
+        type: 3}
+    - target: {fileID: 753281686027351531, guid: 6bb912fcd88b3424181a2eb8d57cf469,
+        type: 3}
+      propertyPath: meteorPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 370257386, guid: 0a93087e97282fd8484b0de4dbb8862a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bb912fcd88b3424181a2eb8d57cf469, type: 3}
 --- !u!1 &391010152
