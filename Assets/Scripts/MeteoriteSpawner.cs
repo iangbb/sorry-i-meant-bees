@@ -12,7 +12,7 @@ public class MeteoriteSpawner : MonoBehaviour
     public float maxMeteoriteSpeed;
     public float totalMeteorsToSpawn;// 0 results in infinite meteors
 
-    public GameObject meteorite;
+    public GameObject[] meteorPrefabs;
     
     private float width;
     private float height;
@@ -42,6 +42,11 @@ public class MeteoriteSpawner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(minSpawnInterval, maxSpawnInterval));
             int edge = Random.Range(0, 4);
             float posX, posY;
+            
+            // Randomly select a prefab
+            int meteor = Random.Range(0, meteorPrefabs.Length);
+            Debug.Log(meteor);
+            GameObject meteorite = meteorPrefabs[meteor];
 
             if (edge % 2 == 0)
             {
