@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class MeteoriteSpawner : MonoBehaviour
 {
-    public float minSpawnInterval = 3;
-    public float maxSpawnInterval = 4;
-    public float minMeteoriteSpeed = 200;
-    public float maxMeteoriteSpeed = 500;
+    
+    // These fields must be customised in subclasses' Start() methods
+    public float minSpawnInterval;
+    public float maxSpawnInterval;
+    public float minMeteoriteSpeed;
+    public float maxMeteoriteSpeed;
+    public float totalMeteorsToSpawn;// 0 results in infinite meteors
 
     public GameObject meteorite;
-
-    private float spawnTimer;
+    
     private float width;
     private float height;
 
@@ -19,7 +21,12 @@ public class MeteoriteSpawner : MonoBehaviour
 
     void Start()
     {
-        spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval);
+        SetupMeteorSpawner();
+        StartCoroutine(SpawnMeteorite());
+    }
+
+    protected void SetupMeteorSpawner()
+    {
         GameObject cont = GameObject.FindGameObjectWithTag("GameController");
         width = cont.GetComponent<boundary_script>().width;
         height = cont.GetComponent<boundary_script>().height;
@@ -27,12 +34,12 @@ public class MeteoriteSpawner : MonoBehaviour
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) players.Add(player);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected IEnumerator SpawnMeteorite()
     {
-        spawnTimer -= Time.deltaTime;
-        if (spawnTimer <= 0)
+        int meteorsSpawned = 0;
+        while (totalMeteorsToSpawn == 0 || meteorsSpawned++ < totalMeteorsToSpawn)
         {
+            yield return new WaitForSeconds(Random.Range(minSpawnInterval, maxSpawnInterval));
             int edge = Random.Range(0, 4);
             float posX, posY;
 
@@ -46,14 +53,12 @@ public class MeteoriteSpawner : MonoBehaviour
                 posY = Random.Range(-1 * (height / 2), height / 2);
                 posX = (width / 2) * (edge - 2);
             }
-            
+
             GameObject newMet = Instantiate(meteorite, new Vector2(posX, posY), new Quaternion());
             GameObject target = players[Random.Range(0, players.Count - 1)];
             Vector2 direction = target.transform.position - newMet.transform.position;
             float meteoriteSpeed = Random.Range(minMeteoriteSpeed, maxMeteoriteSpeed);
             newMet.GetComponent<Rigidbody2D>().AddForce(meteoriteSpeed * direction / direction.magnitude);
-
-            spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval);
         }
     }
 }
