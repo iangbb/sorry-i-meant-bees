@@ -17,10 +17,13 @@ public class playerEngine : MonoBehaviour
     public float force;
     public const float maxSpeed = 8;
 
+    public float collision_time;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        collision_time = Time.time - (float)1.5;
     }
 
     // Update is called once per frame
@@ -57,7 +60,14 @@ public class playerEngine : MonoBehaviour
         if (!anim.GetBool("Left") && !anim.GetBool("Right") && !anim.GetBool("Up") && !anim.GetBool("Down"))
             anim.SetBool("Idle", true);
 
+        if (rb.velocity != Vector2.zero && (Time.time - collision_time) > 1.5) {
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, rb.velocity);
+        } else {
+            transform.Rotate(Vector3.forward * 5);
+        }
+
         hardCapSpeed();
+
     }
 
     public float getAge()
@@ -65,11 +75,18 @@ public class playerEngine : MonoBehaviour
         return age;
     }
 
-    float Phaser(Vector2 velocity, Vector2 new_direction){
+    float Phaser(Vector2 velocity, Vector2 new_direction)
+    {
         Vector2 direction = velocity / velocity.magnitude;
         float cos_theta = Vector2.Dot(direction, new_direction) / (direction.magnitude * new_direction.magnitude);
         float theta = Mathf.Acos(cos_theta);
         return 1 + 10 * Mathf.Sin(theta);
+    }
+
+    public void OnCollisionEnter2D()
+    {
+        collision_time = Time.time;
+        rb.velocity /= 4;
     }
 
     private void hardCapSpeed()
@@ -79,4 +96,5 @@ public class playerEngine : MonoBehaviour
             rb.velocity = rb.velocity * (maxSpeed / rb.velocity.magnitude);
         }
     }
+
 }
