@@ -15,6 +15,7 @@ public class playerEngine : MonoBehaviour
     public KeyCode right;
 
     public float force;
+    public const float maxSpeed = 200;
 
     void Start()
     {
@@ -79,4 +80,11 @@ public class playerEngine : MonoBehaviour
         return 1 + 10 * Mathf.Sin(theta);
     }
 
+    private void hardCapSpeed()
+    {
+        if (rb.velocity.magnitude > maxSpeed)
+        {
+            rb.velocity
+        }
+    }
 }
