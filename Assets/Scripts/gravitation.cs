@@ -10,7 +10,6 @@ public class gravitation : MonoBehaviour {
     void Start() {
         player = gameObject;
         entities = FindObjectsOfType<GameObject>();
-
     }
       
     // Update is called once per frame
@@ -27,13 +26,13 @@ public class gravitation : MonoBehaviour {
             float other_mass = entities[i].GetComponent<info>().mass;
             components[i] = Acceleration(player_mass, other_mass, separation_vector);
         }
-        player.GetComponent<Rigidbody2D>().velocity = FindResultant(components);
+        player.GetComponent<Rigidbody2D>().velocity += FindResultant(components);
     }
 
-    Vector2 Acceleration(float m, float M, Vector2 r_vector) {
+    Vector2 Acceleration(float m1, float m2, Vector2 r_vector) {
         float r = r_vector.magnitude;
         Vector2 direction = r_vector / r;
-        return direction * (G * m * M) / (r * r);
+        return direction * (G * m1 * m2) / (r * r);
     }
 
     Vector2 FindResultant(Vector2[] components) {
