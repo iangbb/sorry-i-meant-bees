@@ -23,7 +23,7 @@ public class playerEngine : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        collision_time = Time.time - 1;
+        collision_time = Time.time - (float)1.5;
     }
 
     // Update is called once per frame
@@ -60,9 +60,10 @@ public class playerEngine : MonoBehaviour
         if (!anim.GetBool("Left") && !anim.GetBool("Right") && !anim.GetBool("Up") && !anim.GetBool("Down"))
             anim.SetBool("Idle", true);
 
-        if (rb.velocity != Vector2.zero && (Time.time - collision_time) > 1)
-        {
+        if (rb.velocity != Vector2.zero && (Time.time - collision_time) > 1.5) {
             transform.rotation = Quaternion.LookRotation(Vector3.forward, rb.velocity);
+        } else {
+            transform.Rotate(Vector3.forward * 5);
         }
 
         hardCapSpeed();
