@@ -7,6 +7,7 @@ public class playerEngine : MonoBehaviour
     // Start is called before the first frame update
     private Rigidbody2D rb;
     private float age;
+    private Animator anim;
 
     public KeyCode down;
     public KeyCode up;
@@ -18,6 +19,7 @@ public class playerEngine : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -33,21 +35,36 @@ public class playerEngine : MonoBehaviour
         if (Input.GetKey(down))
             rb.AddForce(new Vector2(0, -1) * force / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         */
+        anim.SetBool("Left", false);
+        anim.SetBool("Right", false);
+        anim.SetBool("Up", false);
+        anim.SetBool("Down", false);
 
         Vector2 hor = new Vector2(1, 0);
         Vector2 ver = new Vector2(0, 1);
         if (Input.GetKey(left))
+        {
+            anim.SetBool("Left", true);
             rb.AddForce(-hor * force * Phaser(rb.velocity, -hor) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
+        }
         if (Input.GetKey(right))
+        {
+            anim.SetBool("Right", true);
             rb.AddForce(hor * force * Phaser(rb.velocity, hor) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
+        }
         if (Input.GetKey(up))
+        {
+            anim.SetBool("Up", true);
             rb.AddForce(ver * force * Phaser(rb.velocity, ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
+        }
         if (Input.GetKey(down))
+        {
+            anim.SetBool("Down", true);
             rb.AddForce(-ver * force * Phaser(rb.velocity, -ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
-
+        }
         age += (1 / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
-
-        print(rb.velocity.magnitude);
+        if (!anim.GetBool("Left") && !anim.GetBool("Right") && !anim.GetBool("Up") && !anim.GetBool("Down"))
+            anim.SetBool("Idle", true);
     }
 
     public float getAge()
