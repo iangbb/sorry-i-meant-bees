@@ -10,7 +10,7 @@ public class MeteoriteSpawner : MonoBehaviour
     public float maxSpawnInterval;
     public float minMeteoriteSpeed;
     public float maxMeteoriteSpeed;
-    public float totalMeteorsToSpawn;// 0 results in infinite meteors
+    public int totalMeteorsToSpawn;// 0 results in infinite meteors
 
     public GameObject[] meteorPrefabs;
     
@@ -63,7 +63,9 @@ public class MeteoriteSpawner : MonoBehaviour
             GameObject target = players[Random.Range(0, players.Count - 1)];
             Vector2 direction = target.transform.position - newMet.transform.position;
             float meteoriteSpeed = Random.Range(minMeteoriteSpeed, maxMeteoriteSpeed);
-            newMet.GetComponent<Rigidbody2D>().AddForce(meteoriteSpeed * direction / direction.magnitude);
+            Rigidbody2D meteorBody = newMet.GetComponent<Rigidbody2D>();
+            meteorBody.AddForce(meteoriteSpeed * direction / direction.magnitude);
+            meteorBody.AddTorque(Random.Range(1.0f, 3.0f)); // Add random spin
         }
     }
 }
