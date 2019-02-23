@@ -18,8 +18,8 @@ public abstract class JamScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        GameObject player = coll.gameObject;
-        jamEffect(player);
+        GameObject collided = coll.gameObject;
+        if (collided.tag == "Player") jamEffect(collided);
     }
 
     public abstract void jamEffect(GameObject player);
