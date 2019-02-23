@@ -25,4 +25,5 @@ public abstract class JamScript : MonoBehaviour
     }
 
     public abstract void jamEffect(GameObject player);
+
 }
