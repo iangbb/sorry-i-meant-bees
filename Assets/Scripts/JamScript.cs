@@ -17,9 +17,10 @@ public abstract class JamScript : MonoBehaviour
         
     }
 
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
         GameObject collided = coll.gameObject;
+        print(collided);
         if (collided.tag == "Player") jamEffect(collided);
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Collider2D>().enabled = false;

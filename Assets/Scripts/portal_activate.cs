@@ -13,7 +13,7 @@ public class portal_activate : MonoBehaviour
     float x;
     float y;
 
-    private bool portalEnabled;
+    public bool portalEnabled;
 
     // Start is called before the first frame update
     void Start()

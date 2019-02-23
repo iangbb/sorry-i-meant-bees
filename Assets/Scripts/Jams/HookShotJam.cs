@@ -2,25 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeightJamScript : JamScript
+public class HookShotJam : JamScript
 {
-    public float useTime = 5;
-    private bool started = false;
     private GameObject player;
+    private bool started = false;
 
-    public override void jamEffect(GameObject playerCollided)
+    public float useTime = 5;
+
+    public override void jamEffect(GameObject collidedPlayer)
     {
-        print(playerCollided);
-        player = playerCollided;
-        player.GetComponent<player_special_powers>().setWeightEnabled(true);
-        print("Change your weight with the power of this JAM!!!!!");
+        player = collidedPlayer;
+        print("from hookshot " + player);
+        player.GetComponent<hookshot_script>().setHookShotEnabled(true);
+        print("HOOKSHOT!!!!!!!");
         started = true;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -31,9 +32,10 @@ public class WeightJamScript : JamScript
             useTime -= Time.deltaTime;
             if (useTime < 0)
             {
-                player.GetComponent<player_special_powers>().setWeightEnabled(false);
+                player.GetComponent<hookshot_script>().setHookShotEnabled(false);
                 print("Destroying " + gameObject);
                 GameObject.Destroy(gameObject);
+                started = false;
             }
         }
     }

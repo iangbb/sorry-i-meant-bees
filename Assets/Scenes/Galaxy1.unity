@@ -603,8 +603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08de6375b1949f47bcde8d62c73f8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 24
-  height: 11
+  width: 19
+  height: 10
 --- !u!212 &777692960
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -752,6 +752,80 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 182077015}
   m_PrefabAsset: {fileID: 0}
+--- !u!232 &900355288
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900355287}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 1
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 2.7782369
+  m_MaxDistanceOnly: 1
+--- !u!114 &900355289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900355287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1c86f3f10928c346ab68acb6d374d42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portalKey: 304
+  portalIn: {fileID: 3653292218536027180, guid: 928ce2526ac5f0e40a206be64b81833d,
+    type: 3}
+  portalOut: {fileID: 3653292218536027180, guid: 555818f6620bc554dbefc57ec9b7c4ca,
+    type: 3}
+  portalEnabled: 0
+--- !u!114 &900355290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900355287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b7d9ceb69916c04c9afd888c5ac3ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hookshotKey: 102
+  line: {fileID: 1746792338}
+  distance: 100
+  mask:
+    serializedVersion: 2
+    m_Bits: 55
+  step: 0.2
+--- !u!114 &900355291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900355287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65644ad1c3d5c174a89a7b5e06f49194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pullKey: 101
+  pushKey: 113
+  levitateKey: 120
+  antiLeviKey: 99
+  strength: 1
+  weightRestoreTime: 5
 --- !u!95 &900355295
 Animator:
   serializedVersion: 3
@@ -917,6 +991,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2781855040170328715, guid: 549fe5db2be817847b5a5798b3155f31,
+        type: 3}
+      propertyPath: minSpawnInterval
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781855040170328715, guid: 549fe5db2be817847b5a5798b3155f31,
+        type: 3}
+      propertyPath: maxSpawnInterval
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2781855040170328715, guid: 549fe5db2be817847b5a5798b3155f31,
+        type: 3}
+      propertyPath: jams.Array.data[0]
+      value: 
+      objectReference: {fileID: 84315340, guid: 5e4c96bf123dcb940b670d33108002ac,
+        type: 3}
+    - target: {fileID: 2781855040170328715, guid: 549fe5db2be817847b5a5798b3155f31,
+        type: 3}
+      propertyPath: teleportJam
+      value: 
+      objectReference: {fileID: 1761875161, guid: 65bd3ee1b57d2254b81f7a9b53b7d2ef,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 549fe5db2be817847b5a5798b3155f31, type: 3}
 --- !u!1 &1053828819
@@ -1345,11 +1441,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1c86f3f10928c346ab68acb6d374d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalKey: 32
+  portalKey: 305
   portalIn: {fileID: 3653292218536027180, guid: 928ce2526ac5f0e40a206be64b81833d,
     type: 3}
   portalOut: {fileID: 3653292218536027180, guid: 555818f6620bc554dbefc57ec9b7c4ca,
     type: 3}
+  portalEnabled: 0
 --- !u!114 &1970897273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1369,6 +1466,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 55
   step: 0.2
+--- !u!114 &1970897274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970897270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65644ad1c3d5c174a89a7b5e06f49194, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pullKey: 257
+  pushKey: 303
+  levitateKey: 258
+  antiLeviKey: 259
+  strength: 1
+  weightRestoreTime: 5
 --- !u!232 &1970897280
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -1468,7 +1583,7 @@ PrefabInstance:
     - target: {fileID: 6179889501642266725, guid: 91e049616c2365f4ebdf1de9232c1301,
         type: 3}
       propertyPath: mass
-      value: 15
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91e049616c2365f4ebdf1de9232c1301, type: 3}
@@ -1930,7 +2045,7 @@ PrefabInstance:
     - target: {fileID: 6179889501642266725, guid: 91e049616c2365f4ebdf1de9232c1301,
         type: 3}
       propertyPath: mass
-      value: 40
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91e049616c2365f4ebdf1de9232c1301, type: 3}

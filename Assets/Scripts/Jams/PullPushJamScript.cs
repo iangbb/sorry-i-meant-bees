@@ -36,6 +36,7 @@ public class PullPushJamScript : JamScript
                 player.GetComponent<player_special_powers>().setPullPushEnabled(false);
                 print("Destroying " + gameObject);
                 GameObject.Destroy(gameObject);
+                started = false;
             }
         }
     }

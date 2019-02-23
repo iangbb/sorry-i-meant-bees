@@ -29,6 +29,7 @@ public class TeleportJam : JamScript
             //TODO Respawn
             print("Destroying " + gameObject);
             GameObject.Destroy(gameObject);
+            started = false;
         }
     }
 }

@@ -19,6 +19,5 @@ public class grabAge : MonoBehaviour
     void Update()
     {
         anim.SetInteger("Age", playerScript.getAgeAnim());
-        print(playerScript.getAgeAnim());
     }
 }
