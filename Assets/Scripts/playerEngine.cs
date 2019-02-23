@@ -15,8 +15,6 @@ public class playerEngine : MonoBehaviour
 
     public float force;
 
-    public bool keys;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,15 +24,17 @@ public class playerEngine : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(left))
-            rb.AddForce(new Vector3(-1, 0, 0) * force);
+            rb.AddForce(new Vector3(-1, 0, 0) * force / Mathf.Log10(rb.velocity.magnitude + 2f));
         if (Input.GetKey(right))
-            rb.AddForce(new Vector3(1, 0, 0) * force);
+            rb.AddForce(new Vector3(1, 0, 0) * force / Mathf.Log10(rb.velocity.magnitude + 2f));
         if (Input.GetKey(up))
-            rb.AddForce(new Vector3(0, 1, 0) * force);
+            rb.AddForce(new Vector3(0, 1, 0) * force / Mathf.Log10(rb.velocity.magnitude + 2f));
         if (Input.GetKey(down))
-            rb.AddForce(new Vector3(0, -1, 0) * force);
+            rb.AddForce(new Vector3(0, -1, 0) * force / Mathf.Log10(rb.velocity.magnitude + 2f));
 
-        age += (1 / (rb.velocity.magnitude + 1)) * Time.deltaTime;
+        age += (1 / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
+
+        print(rb.velocity.magnitude);
     }
 
     public float getAge()
