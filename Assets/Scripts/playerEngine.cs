@@ -15,7 +15,7 @@ public class playerEngine : MonoBehaviour
     public KeyCode right;
 
     public float force;
-    public const float maxSpeed = 100;
+    public const float maxSpeed = 8;
 
     void Start()
     {
@@ -66,6 +66,8 @@ public class playerEngine : MonoBehaviour
         age += (0.5f / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
         if (!anim.GetBool("Left") && !anim.GetBool("Right") && !anim.GetBool("Up") && !anim.GetBool("Down"))
             anim.SetBool("Idle", true);
+
+        hardCapSpeed();
     }
 
     public float getAge()
