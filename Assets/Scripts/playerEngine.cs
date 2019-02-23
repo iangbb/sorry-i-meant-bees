@@ -62,7 +62,7 @@ public class playerEngine : MonoBehaviour
             anim.SetBool("Down", true);
             rb.AddForce(-ver * force * Phaser(rb.velocity, -ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
-        age += (1 / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
+        age += (0.5f / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
         if (!anim.GetBool("Left") && !anim.GetBool("Right") && !anim.GetBool("Up") && !anim.GetBool("Down"))
             anim.SetBool("Idle", true);
     }
