@@ -15,7 +15,6 @@ public class boundary_script : MonoBehaviour
         foreach (GameObject body in GameObject.FindGameObjectsWithTag("Player"))
         {
             bodies.Add(body.GetComponent<Rigidbody2D>());
-            print(body);
         }
     }
 
