@@ -1,21 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class age_display : MonoBehaviour
 {
     public int age;
     public Text ageText;
-    // Start is called before the first frame update
+    public playerEngine playerScript;
+    public int player;
+    
     void Start()
     {
-
+        playerScript = GameObject.Find("Player " + player).GetComponent<playerEngine>();
+        transform.SetAsLastSibling();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        ageText.text = "Age: " + age;
+        age = (int)playerScript.getAge();
+        ageText.text = "" + age;
     }
 }
