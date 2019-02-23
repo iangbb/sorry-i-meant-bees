@@ -431,9 +431,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSpawnInterval: 0.2
-  maxSpawnInterval: 3
+  maxSpawnInterval: 2
   minMeteoriteSpeed: 200
   maxMeteoriteSpeed: 500
+  totalMeteorsToSpawn: 20
   meteorite: {fileID: 370257386, guid: b8519c5f905720b49a14c29c931215d0, type: 3}
   minimumShowerDelay: 30
   maximumShowerDelay: 60

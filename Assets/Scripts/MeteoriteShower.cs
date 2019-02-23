@@ -12,10 +12,11 @@ public class MeteoriteShower : MeteoriteSpawner
     public Text meteorShowerAlertText;
     
     // Start is called before the first frame update
-    protected new void Start()
+    void Start()
     {
+        // Customise MeteoriteSpawner's public fields
         minSpawnInterval = 0.2f;
-        maxSpawnInterval = 1.0f;
+        maxSpawnInterval = 2.0f;
         totalMeteorsToSpawn = 20;
         SetupMeteorSpawner();
         StartCoroutine(LoopMeteorShowerAfterRandomTime());

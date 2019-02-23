@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class MeteoriteSpawner : MonoBehaviour
 {
-    public float minSpawnInterval = 3;
-    public float maxSpawnInterval = 4;
-    public float minMeteoriteSpeed = 200;
-    public float maxMeteoriteSpeed = 500;
+    
+    // These fields must be customised in subclasses' Start() methods
+    public float minSpawnInterval;
+    public float maxSpawnInterval;
+    public float minMeteoriteSpeed;
+    public float maxMeteoriteSpeed;
+    public float totalMeteorsToSpawn;// 0 results in infinite meteors
 
     public GameObject meteorite;
-
-    private float spawnTimer;
+    
     private float width;
     private float height;
-    protected int totalMeteorsToSpawn = 0;
 
     private List<GameObject> players;
 
