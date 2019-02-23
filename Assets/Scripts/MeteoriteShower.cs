@@ -14,13 +14,7 @@ public class MeteoriteShower : MeteoriteSpawner
         minSpawnInterval = 0.2f;
         maxSpawnInterval = 1.0f;
         totalMeteorsToSpawn = 20;
-        StartCoroutine(DelayedActivation(Random.Range(30.0f, 60.0f)));
-    }
-
-    private IEnumerator DelayedActivation(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        base.Start();
+        SetupMeteorSpawner();
         StartCoroutine(LoopMeteorShowerAfterRandomTime());
     }
 

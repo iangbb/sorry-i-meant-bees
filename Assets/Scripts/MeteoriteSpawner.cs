@@ -18,20 +18,19 @@ public class MeteoriteSpawner : MonoBehaviour
 
     private List<GameObject> players;
 
-    protected void Start()
+    void Start()
+    {
+        SetupMeteorSpawner();
+        StartCoroutine(SpawnMeteorite());
+    }
+
+    protected void SetupMeteorSpawner()
     {
         GameObject cont = GameObject.FindGameObjectWithTag("GameController");
         width = cont.GetComponent<boundary_script>().width;
         height = cont.GetComponent<boundary_script>().height;
         players = new List<GameObject>();
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) players.Add(player);
-        StartCoroutine(SpawnMeteorite());
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     protected IEnumerator SpawnMeteorite()
