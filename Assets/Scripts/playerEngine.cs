@@ -16,10 +16,13 @@ public class playerEngine : MonoBehaviour
 
     public float force;
 
+    public float collision_time;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        collision_time = Time.time - 1;
     }
 
     // Update is called once per frame
@@ -55,6 +58,10 @@ public class playerEngine : MonoBehaviour
         age += (0.5f / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
         if (!anim.GetBool("Left") && !anim.GetBool("Right") && !anim.GetBool("Up") && !anim.GetBool("Down"))
             anim.SetBool("Idle", true);
+
+        if (rb.velocity != Vector2.zero && (Time.time - collision_time) > 1) {
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, rb.velocity);
+        }
     }
 
     public float getAge()
@@ -67,6 +74,11 @@ public class playerEngine : MonoBehaviour
         float cos_theta = Vector2.Dot(direction, new_direction) / (direction.magnitude * new_direction.magnitude);
         float theta = Mathf.Acos(cos_theta);
         return 1 + 10 * Mathf.Sin(theta);
+    }
+
+    public void OnCollisionEnter2D(){
+        collision_time = Time.time;
+        rb.velocity /= 4;
     }
 
 }
