@@ -12,18 +12,22 @@ public class hookshot_script : MonoBehaviour
     public float distance = 100f;
     public LayerMask mask;
     public float step = 0.2f;
-    // Start is called before the first frame update
+
+    private bool hookshotEnabled;
+
+
     void Start()
     {
         joint = GetComponent<DistanceJoint2D>();
         joint.enabled = false;
         line.enabled = false;
+        hookshotEnabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(hookshotKey))
+        if (Input.GetKeyDown(hookshotKey) && hookshotEnabled)
         {
             targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             targetPos.z = 0;
@@ -51,4 +55,8 @@ public class hookshot_script : MonoBehaviour
             line.enabled = false;
         }
     }
+
+    public void setHookShotEnabled(bool w) { hookshotEnabled = w; }
+
+    public bool getHookShotEnabled() { return hookshotEnabled; }
 }
