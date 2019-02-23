@@ -8,8 +8,18 @@ public class player_special_powers : MonoBehaviour
 
     public KeyCode pullKey;
     public KeyCode pushKey;
+    public KeyCode levitateKey;
+    public KeyCode antiLeviKey;
     public float strength;
 
+    private float origMass;
+
+    private float minMass = 0.001f;
+    private float maxMass = 1000;
+
+    public float weightRestoreTime = 3;
+    private float weightRestDelta;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,33 +29,68 @@ public class player_special_powers : MonoBehaviour
             if (player != gameObject)
             {
                 otherPlayers.Add(player);
-                print(player);
             }
         }
+        origMass = gameObject.GetComponent<info>().mass;
     }
 
     // Update is called once per frame
     void Update()
     {
+        float mass = gameObject.GetComponent<info>().mass;
         if (Input.GetKeyDown(pullKey))
         {
             foreach (GameObject player in otherPlayers)
             {
                 addForce(player, strength * (-1));
             }
-        } else if (Input.GetKeyDown(pushKey))
+        }
+
+        if (Input.GetKeyDown(pushKey))
         {
             foreach (GameObject player in otherPlayers)
             {
                 addForce(player, strength);
             }
         }
+
+        if (Input.GetKeyDown(levitateKey))
+        {
+            useMassPower(mass / 2);
+        }
+
+        if (Input.GetKeyDown(antiLeviKey))
+        {
+            useMassPower(mass * 2);
+        }
+
+        updateMass();
+    }
+
+    private void updateMass()
+    {
+        float newMass = gameObject.GetComponent<info>().mass + Time.deltaTime * weightRestDelta;
+        if ((newMass < origMass && weightRestDelta < 0) || (newMass > origMass && weightRestDelta > 0))
+        {
+            newMass = origMass;
+            weightRestDelta = 0;
+        }
+        gameObject.GetComponent<info>().mass = newMass;
+    }
+
+    private void useMassPower(float newMass)
+    {
+        if (newMass < minMass || newMass > maxMass) return;
+
+        weightRestDelta = (origMass - newMass) / weightRestoreTime;
+        gameObject.GetComponent<info>().mass = newMass;
     }
 
     private void addForce(GameObject player, float force)
     {
         Vector3 direction = player.transform.position - gameObject.transform.position;
         player.GetComponent<Rigidbody2D>().AddForce(
-            gameObject.GetComponent<playerEngine>().getAge() * force * direction / Mathf.Pow(direction.magnitude, 2));
+            gameObject.GetComponent<playerEngine>().getAge()  * force * direction
+            / (Mathf.Pow(direction.magnitude, 2)) * gameObject.GetComponent<info>().mass);
     }
 }
