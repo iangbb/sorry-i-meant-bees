@@ -37,24 +37,59 @@ public class playerEngine : MonoBehaviour
         Vector2 hor = new Vector2(1, 0);
         Vector2 ver = new Vector2(0, 1);
 
-        if (Input.GetKey(left))
+        KeyCode[] arrows = new KeyCode[] { up, down, left, right };
+        Vector2[] indications = new Vector2[] { ver, -ver, -hor, hor };
+        bool[] pressed = new bool[] { false, false, false, false };
+        Vector2 to_go_vec = new Vector2(0, 0);
+
+        bool nothing = true;
+        for (int i = 0; i < arrows.Length; i++) {
+            if (Input.GetKey(arrows[i])) {
+                nothing = false;
+                pressed[i] = true;
+                to_go_vec += indications[i];
+            }
+        }
+
+        float to_go_dir = Vector2.Angle(rb.velocity, to_go_vec);
+        Vector3 cross = Vector3.Cross(rb.velocity, to_go_vec);
+
+        if (cross.z > 0)
+            to_go_dir = 360 - to_go_dir;
+
+
+
+        if (!nothing) {
+            Debug.Log(to_go_dir);
+            if (to_go_dir <= 67.5 || to_go_dir >= 292.5)
+            {
+                anim.SetBool("Up", true);
+            }
+            if (to_go_dir >= 22.5 && to_go_dir <= 157.5)
+            {
+                anim.SetBool("Right", true);
+            }
+            if (to_go_dir >= 202.5 && to_go_dir <= 337.5)
+            {
+                anim.SetBool("Left", true);
+            }
+        }
+
+
+        if (pressed[2])
         {
-            anim.SetBool("Left", true);
             rb.AddForce(-hor * force * Phaser(rb.velocity, -hor) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
-        if (Input.GetKey(right))
+        if (pressed[3])
         {
-            anim.SetBool("Right", true);
             rb.AddForce(hor * force * Phaser(rb.velocity, hor) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
-        if (Input.GetKey(up))
+        if (pressed[0])
         {
-            anim.SetBool("Up", true);
             rb.AddForce(ver * force * Phaser(rb.velocity, ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
-        if (Input.GetKey(down))
+        if (pressed[1])
         {
-            anim.SetBool("Down", true);
             rb.AddForce(-ver * force * Phaser(rb.velocity, -ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
         age += (0.5f / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
