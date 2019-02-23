@@ -6,6 +6,9 @@ using UnityEngine.UI;
 public class MeteoriteShower : MeteoriteSpawner
 {
 
+    public float minimumShowerDelay;
+    public float maximumShowerDelay;
+    
     public Text meteorShowerAlertText;
     
     // Start is called before the first frame update
@@ -14,13 +17,7 @@ public class MeteoriteShower : MeteoriteSpawner
         minSpawnInterval = 0.2f;
         maxSpawnInterval = 1.0f;
         totalMeteorsToSpawn = 20;
-        StartCoroutine(DelayedActivation(Random.Range(30.0f, 60.0f)));
-    }
-
-    private IEnumerator DelayedActivation(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        base.Start();
+        SetupMeteorSpawner();
         StartCoroutine(LoopMeteorShowerAfterRandomTime());
     }
 
@@ -28,7 +25,7 @@ public class MeteoriteShower : MeteoriteSpawner
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(30.0f, 60.0f));
+            yield return new WaitForSeconds(Random.Range(minimumShowerDelay, maximumShowerDelay));
             StartCoroutine(ShowMeteoriteShowerAlert());
             StartCoroutine(SpawnMeteorite());
         }
