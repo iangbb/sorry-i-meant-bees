@@ -26,9 +26,9 @@ public class boundary_script : MonoBehaviour
         {
             Vector3 pos = rb.transform.position;
 
-            if (pos.x < (-1) * width / 2 || pos.x > width / 2)
+            if (Mathf.Abs(pos.x) > width / 2)
                 rb.transform.position = new Vector3(pos.x * (-1) + (pos.x > 0 ? boundaryIncrement : -boundaryIncrement), pos.y, pos.z);
-            if (pos.y < (-1) * height / 2 || pos.y > height / 2)
+            if (Mathf.Abs(pos.y) > height / 2)
                 rb.transform.position = new Vector3(pos.x, pos.y * (-1) + (pos.y > 0 ? boundaryIncrement : -boundaryIncrement), pos.z);
         }
     }
