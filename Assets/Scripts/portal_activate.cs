@@ -13,6 +13,8 @@ public class portal_activate : MonoBehaviour
     float x;
     float y;
 
+    private bool portalEnabled;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,12 +26,13 @@ public class portal_activate : MonoBehaviour
                 otherPlayers.Add(player);
             }
         }
+        portalEnabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(portalKey))
+        if (Input.GetKeyDown(portalKey) && portalEnabled)
         {
             //creates portal in front of player
             foreach (GameObject player in otherPlayers)
@@ -41,6 +44,11 @@ public class portal_activate : MonoBehaviour
                 Object.Destroy(newPortalIn.gameObject, 3.0f);
                 Object.Destroy(newPortalOut.gameObject, 3.0f);
             }
+            portalEnabled = false;
         }
     }
+
+    public void setPortalEnabled(bool w) { portalEnabled = w; }
+
+    public bool getPortalEnabled() { return portalEnabled; }
 }

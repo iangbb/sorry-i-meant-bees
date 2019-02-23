@@ -17,8 +17,11 @@ public class player_special_powers : MonoBehaviour
     private float minMass = 0.001f;
     private float maxMass = 1000;
 
-    public float weightRestoreTime = 3;
+    public float weightRestoreTime = 5;
     private float weightRestDelta;
+
+    private bool weightEnabled;
+    private bool pullPushEnabled;
     
     // Start is called before the first frame update
     void Start()
@@ -32,6 +35,8 @@ public class player_special_powers : MonoBehaviour
             }
         }
         origMass = gameObject.GetComponent<info>().mass;
+        weightEnabled = false;
+        pullPushEnabled = false;
     }
 
     // Update is called once per frame
@@ -56,12 +61,12 @@ public class player_special_powers : MonoBehaviour
 
         if (Input.GetKeyDown(levitateKey))
         {
-            useMassPower(mass / 2);
+            useMassPower(mass / 4);
         }
 
         if (Input.GetKeyDown(antiLeviKey))
         {
-            useMassPower(mass * 2);
+            useMassPower(mass * 4);
         }
 
         updateMass();
@@ -80,7 +85,7 @@ public class player_special_powers : MonoBehaviour
 
     private void useMassPower(float newMass)
     {
-        if (newMass < minMass || newMass > maxMass) return;
+        if (!weightEnabled || newMass < minMass || newMass > maxMass) return;
 
         weightRestDelta = (origMass - newMass) / weightRestoreTime;
         gameObject.GetComponent<info>().mass = newMass;
@@ -88,9 +93,31 @@ public class player_special_powers : MonoBehaviour
 
     private void addForce(GameObject player, float force)
     {
+        if (!pullPushEnabled) return;
+        print("Adding force");
         Vector3 direction = player.transform.position - gameObject.transform.position;
         player.GetComponent<Rigidbody2D>().AddForce(
             gameObject.GetComponent<playerEngine>().getAge()  * force * direction
             / (Mathf.Pow(direction.magnitude, 2)) * gameObject.GetComponent<info>().mass);
+    }
+
+    public bool getWeightEnabled()
+    {
+        return weightEnabled;
+    }
+
+    public void setWeightEnabled(bool w)
+    {
+        weightEnabled = w; 
+    }
+
+    public bool getPullPushEnabled()
+    {
+        return pullPushEnabled;
+    }
+
+    public void setPullPushEnabled(bool w)
+    {
+        pullPushEnabled = w;
     }
 }
