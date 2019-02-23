@@ -36,6 +36,7 @@ public class playerEngine : MonoBehaviour
 
         Vector2 hor = new Vector2(1, 0);
         Vector2 ver = new Vector2(0, 1);
+
         if (Input.GetKey(left))
         {
             anim.SetBool("Left", true);
@@ -60,12 +61,16 @@ public class playerEngine : MonoBehaviour
         if (!anim.GetBool("Left") && !anim.GetBool("Right") && !anim.GetBool("Up") && !anim.GetBool("Down"))
             anim.SetBool("Idle", true);
 
-        if (rb.velocity != Vector2.zero && (Time.time - collision_time) > 1.5) {
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, rb.velocity);
-        } else {
-            transform.Rotate(Vector3.forward * 5);
+        float time_differential = Time.time - collision_time;
+        if (rb.velocity != Vector2.zero && (time_differential) > 1.5) {
+            //transform.rotation = Quaternion.LookRotation(Vector3.forward, rb.velocity);
+            Vector3 vectorToTarget = rb.velocity - (Vector2)transform.forward;
+            float angle = Mathf.Atan2(-vectorToTarget.x, vectorToTarget.y) * Mathf.Rad2Deg;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 100);
+        } else if (time_differential <= 1.5) {
+            transform.Rotate((Vector3.forward * 5) / ((time_differential + (float)1.5) * (time_differential + (float)1.5)));
         }
-
         hardCapSpeed();
 
     }
