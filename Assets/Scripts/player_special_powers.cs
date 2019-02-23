@@ -29,7 +29,6 @@ public class player_special_powers : MonoBehaviour
             if (player != gameObject)
             {
                 otherPlayers.Add(player);
-                print(player);
             }
         }
         origMass = gameObject.GetComponent<info>().mass;
