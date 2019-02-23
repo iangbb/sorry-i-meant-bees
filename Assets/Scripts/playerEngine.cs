@@ -46,8 +46,6 @@ public class playerEngine : MonoBehaviour
             rb.AddForce(-ver * force * Phaser(rb.velocity, -ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
 
         age += (1 / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
-
-        print(rb.velocity.magnitude);
     }
 
     public float getAge()
