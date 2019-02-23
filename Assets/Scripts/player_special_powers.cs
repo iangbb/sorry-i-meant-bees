@@ -77,7 +77,6 @@ public class player_special_powers : MonoBehaviour
             weightRestDelta = 0;
         }
         gameObject.GetComponent<info>().mass = newMass;
-        print(gameObject.GetComponent<info>().mass);
     }
 
     private void useMassPower(float newMass)
