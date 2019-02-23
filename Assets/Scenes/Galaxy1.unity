@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6bc6b4b20b3f524b87afb1ddb60e145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 317205774}
+  player: {fileID: 1962080780}
 --- !u!114 &1923025602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1092,6 +1092,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923025599}
   m_CullTransparentMesh: 0
+--- !u!1 &1962080780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 821604958246168539, guid: ef78793396517ac4ab7bc5d10f4e089b,
+    type: 3}
+  m_PrefabInstance: {fileID: 182077015}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1984837710
 PrefabInstance:
   m_ObjectHideFlags: 0
