@@ -25,16 +25,6 @@ public class playerEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (Input.GetKey(left))
-            rb.AddForce(new Vector2(-1, 0) * force * 6 / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
-        if (Input.GetKey(right))
-            rb.AddForce(new Vector2(1, 0) * force * 6 / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
-        if (Input.GetKey(up))
-            rb.AddForce(new Vector2(0, 1) * force / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
-        if (Input.GetKey(down))
-            rb.AddForce(new Vector2(0, -1) * force / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
-        */
         anim.SetBool("Left", false);
         anim.SetBool("Right", false);
         anim.SetBool("Up", false);
