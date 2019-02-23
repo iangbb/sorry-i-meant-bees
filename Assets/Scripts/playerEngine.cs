@@ -6,13 +6,14 @@ public class playerEngine : MonoBehaviour
 {
     // Start is called before the first frame update
     private Rigidbody2D rb;
-    private float age;
+    private float age = 21;
     private Animator anim;
 
     public KeyCode down;
     public KeyCode up;
     public KeyCode left;
     public KeyCode right;
+
 
     public float force;
     public const float maxSpeed = 8;
@@ -57,7 +58,7 @@ public class playerEngine : MonoBehaviour
             anim.SetBool("Down", true);
             rb.AddForce(-ver * force * Phaser(rb.velocity, -ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
-        age += (0.5f / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
+        age += (1f / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
         if (!anim.GetBool("Left") && !anim.GetBool("Right") && !anim.GetBool("Up") && !anim.GetBool("Down"))
             anim.SetBool("Idle", true);
 
@@ -78,6 +79,36 @@ public class playerEngine : MonoBehaviour
     public float getAge()
     {
         return age;
+    }
+
+    public int getAgeAnim()
+    {
+        if (age < 42)
+        {
+            return 0;
+        }
+        if((age >= 42.0f) && (age < 60.0f))
+        {
+            return 1;
+        }
+        if (age >= 60.0f && age < 84.0f)
+        {
+            return 2;
+        }
+        if (age >= 84.0f && age < 98.0f)
+        {
+            return 3;
+        }
+        if (age >= 98.0f && age < 115.0f)
+        {
+            return 4;
+        }
+        if(age >= 115)
+        {
+            return 5;
+        }
+        return 0;
+
     }
 
     float Phaser(Vector2 velocity, Vector2 new_direction)
