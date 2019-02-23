@@ -17,7 +17,7 @@ public class player_special_powers : MonoBehaviour
     private float minMass = 0.001f;
     private float maxMass = 1000;
 
-    public float weightRestoreTime = 3;
+    public float weightRestoreTime = 5;
     private float weightRestDelta;
 
     private bool weightEnabled;
@@ -61,12 +61,12 @@ public class player_special_powers : MonoBehaviour
 
         if (Input.GetKeyDown(levitateKey))
         {
-            useMassPower(mass / 2);
+            useMassPower(mass / 4);
         }
 
         if (Input.GetKeyDown(antiLeviKey))
         {
-            useMassPower(mass * 2);
+            useMassPower(mass * 4);
         }
 
         updateMass();
