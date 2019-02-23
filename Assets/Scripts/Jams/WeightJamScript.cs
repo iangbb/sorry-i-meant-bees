@@ -10,7 +10,6 @@ public class WeightJamScript : JamScript
 
     public override void jamEffect(GameObject playerCollided)
     {
-        print(playerCollided);
         player = playerCollided;
         player.GetComponent<player_special_powers>().setWeightEnabled(true);
         print("Change your weight with the power of this JAM!!!!!");
@@ -32,7 +31,6 @@ public class WeightJamScript : JamScript
             if (useTime < 0)
             {
                 player.GetComponent<player_special_powers>().setWeightEnabled(false);
-                print("Destroying " + gameObject);
                 GameObject.Destroy(gameObject);
                 started = false;
             }
