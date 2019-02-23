@@ -15,7 +15,7 @@ public class playerEngine : MonoBehaviour
     public KeyCode right;
 
     public float force;
-    public const float maxSpeed = 200;
+    public const float maxSpeed = 100;
 
     void Start()
     {
@@ -84,7 +84,7 @@ public class playerEngine : MonoBehaviour
     {
         if (rb.velocity.magnitude > maxSpeed)
         {
-            rb.velocity
+            rb.velocity = rb.velocity * (maxSpeed / rb.velocity.magnitude);
         }
     }
 }
