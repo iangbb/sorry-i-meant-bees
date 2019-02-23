@@ -19,8 +19,7 @@ public class info : MonoBehaviour
     }
     void FixedUpdate()
     {
-        speed = ((Vector2) transform.position - lastPosition).magnitude;
-        lastPosition = (Vector2) transform.position;
+        speed = gameObject.GetComponent<Rigidbody2D>().velocity.magnitude/100;
     }
 }
 
