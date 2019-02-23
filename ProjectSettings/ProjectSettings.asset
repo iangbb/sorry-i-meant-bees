@@ -566,6 +566,7 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Collab: 1
     UNet: 1
   luminIcon:
     m_Name: 
@@ -586,10 +587,10 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: 87cf7e6c-e8f0-4ea3-8b58-85fc5a814620
+  cloudProjectId: 58fbee8f-7fde-4ba3-a3af-4acbf5056d38
   framebufferDepthMemorylessMode: 0
   projectName: sorry-i-meant-bees
-  organizationId: iangbb
+  organizationId: aliceravier
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
