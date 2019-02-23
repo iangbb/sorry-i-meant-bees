@@ -50,5 +50,5 @@ public class portal_activate : MonoBehaviour
 
     public void setPortalEnabled(bool w) { portalEnabled = w; }
 
-    public bool getPortalEnabled(bool w) { return portalEnabled; }
+    public bool getPortalEnabled() { return portalEnabled; }
 }

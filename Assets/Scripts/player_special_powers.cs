@@ -89,14 +89,12 @@ public class player_special_powers : MonoBehaviour
 
         weightRestDelta = (origMass - newMass) / weightRestoreTime;
         gameObject.GetComponent<info>().mass = newMass;
-        weightEnabled = false;
     }
 
     private void addForce(GameObject player, float force)
     {
         if (!pullPushEnabled) return;
 
-        pullPushEnabled = false;
         Vector3 direction = player.transform.position - gameObject.transform.position;
         player.GetComponent<Rigidbody2D>().AddForce(
             gameObject.GetComponent<playerEngine>().getAge()  * force * direction

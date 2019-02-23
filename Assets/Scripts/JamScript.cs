@@ -20,6 +20,8 @@ public abstract class JamScript : MonoBehaviour
     {
         GameObject collided = coll.gameObject;
         if (collided.tag == "Player") jamEffect(collided);
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
     }
 
     public abstract void jamEffect(GameObject player);
