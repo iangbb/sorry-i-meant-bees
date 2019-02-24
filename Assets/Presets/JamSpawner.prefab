@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2781855040170328713}
   - component: {fileID: 2781855040170328714}
   - component: {fileID: 2781855040170328715}
+  - component: {fileID: 4746446742618640417}
   m_Layer: 0
   m_Name: JamSpawner
   m_TagString: Untagged
@@ -100,3 +101,17 @@ MonoBehaviour:
   - {fileID: 8189543893607274028, guid: 45ba0b6c41572fa49a8e839f0026f6b7, type: 3}
   teleportJam: {fileID: 84315340, guid: 5e4c96bf123dcb940b670d33108002ac, type: 3}
   teleportJamProb: 0.1
+--- !u!114 &4746446742618640417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2781855040170328716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dba5db9758c9df4cbdca06437006f11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mass: 0
+  speed: 0

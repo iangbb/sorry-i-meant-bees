@@ -15,13 +15,18 @@ public class hookshot_script : MonoBehaviour
 
     private bool hookshotEnabled;
 
+    GameObject[] entities;
+    GameObject player;
+
 
     void Start()
     {
         joint = GetComponent<DistanceJoint2D>();
         joint.enabled = false;
         line.enabled = false;
-        hookshotEnabled = false;
+        hookshotEnabled = true;
+        entities = FindObjectsOfType<GameObject>();
+        player = gameObject;
     }
 
     // Update is called once per frame
@@ -29,11 +34,27 @@ public class hookshot_script : MonoBehaviour
     {
         if (Input.GetKeyDown(hookshotKey) && hookshotEnabled)
         {
-            targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            targetPos.z = 0;
+            GameObject nearestObject = entities[0];
+            float closest = Mathf.Infinity;
+            float mass;
+            float separation;
+            float nearestMass = Mathf.Infinity;
+            for (int i = 0; i < entities.Length; i++) {
+                mass = entities[i].GetComponent<info>().mass;
+                separation = (player.GetComponent<Transform>().position - entities[i].GetComponent<Transform>().position).magnitude;
+
+                if (mass != 0 && entities[i] != player && (separation < closest || nearestMass == 0)) {
+                    nearestObject = entities[i];
+                    nearestMass = mass;
+                    closest = separation;
+                    targetPos = nearestObject.GetComponent<Transform>().position;
+                    targetPos.z = 0;
+                }
+            }
+            Debug.Log(nearestObject);
             hit = Physics2D.Raycast(transform.position, targetPos - transform.position, distance, mask);
-            if(hit.collider != null && hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
-            {
+            if (hit.collider != null && hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
+            { 
                 joint.enabled = true;
                 joint.connectedBody = hit.collider.gameObject.GetComponent<Rigidbody2D>();
                 joint.distance = Vector2.Distance(transform.position, hit.collider.transform.position);
@@ -42,6 +63,7 @@ public class hookshot_script : MonoBehaviour
                 line.SetPosition(0, transform.position);
                 line.SetPosition(1, hit.collider.transform.position);
             }
+
         }
 
         if (Input.GetKey(hookshotKey))

@@ -19,7 +19,10 @@ public class info : MonoBehaviour
     }
     void FixedUpdate()
     {
-        speed = gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
+        if (mass != 0)
+        {
+            speed = gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
+        }
     }
 }
 
