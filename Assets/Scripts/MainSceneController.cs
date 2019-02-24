@@ -26,6 +26,8 @@ public class MainSceneController : MonoBehaviour
     {
         DontDestroyOnLoad(GameObject.Find("Canvas"));
         showControlInfo = false;
+        player1Controls.text = "";
+        player2Controls.text = "";
     }
 
     // Update is called once per frame

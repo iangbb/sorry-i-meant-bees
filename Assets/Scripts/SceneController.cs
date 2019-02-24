@@ -63,7 +63,7 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         introText.text = "They had already used\nall the usual ways...";
         yield return new WaitForSeconds(waitTime);
-        introText.text = "...supreme medicine, exercise\nyou name it...";
+        introText.text = "...supreme medicine, exercise,\nyou name it...";
         yield return new WaitForSeconds(waitTime);
         introText.text = "...but as we all know...";
         yield return new WaitForSeconds(waitTime);
