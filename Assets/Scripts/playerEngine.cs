@@ -41,13 +41,13 @@ public class playerEngine : MonoBehaviour
         anim.SetBool("Up", false);
         anim.SetBool("Down", false);
 
-        Vector2 hor = new Vector2(1, 0);
-        Vector2 ver = new Vector2(0, 1);
+        Vector2 hor = rb.transform.right;
+        Vector2 ver = rb.transform.up;
 
         KeyCode[] arrows = new KeyCode[] { up, down, left, right };
         Vector2[] indications = new Vector2[] { ver, -ver, -hor, hor };
         bool[] pressed = new bool[] { false, false, false, false };
-        Vector2 to_go_vec = new Vector2(0, 0);
+        Vector2 to_go_vec = rb.transform.up;
 
         bool nothing = true;
         for (int i = 0; i < arrows.Length; i++) {
@@ -215,7 +215,7 @@ public class playerEngine : MonoBehaviour
         Vector2 direction = velocity / velocity.magnitude;
         float cos_theta = Vector2.Dot(direction, new_direction) / (direction.magnitude * new_direction.magnitude);
         float theta = Mathf.Acos(cos_theta);
-        return 1 + 10 * Mathf.Sin(theta);
+        return 1 + 40 * Mathf.Sin(theta);
     }
 
     public void OnCollisionEnter2D()
