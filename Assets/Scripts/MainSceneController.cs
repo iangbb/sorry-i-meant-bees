@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainSceneController : MonoBehaviour
@@ -25,7 +26,15 @@ public class MainSceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (player1.GetComponent<playerEngine>().getAge() > 115)
+        {
+            GameObject.DontDestroyOnLoad(player2);
+            SceneManager.LoadScene(endScene, LoadSceneMode.Single);
+        }else if (player2.GetComponent<playerEngine>().getAge() > 115)
+        {
+            GameObject.DontDestroyOnLoad(player1);
+            SceneManager.LoadScene(endScene, LoadSceneMode.Single);
+        }
     }
 
     private IEnumerator showControls(GameObject player, Text text)
