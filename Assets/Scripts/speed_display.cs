@@ -10,6 +10,7 @@ public class speed_display : MonoBehaviour
     public int player;
 
     private info playerInfoComponent;
+
     // Start is called before the first frame update
     void Start()
     {
