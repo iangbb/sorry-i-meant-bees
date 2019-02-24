@@ -20,11 +20,14 @@ public class MainSceneController : MonoBehaviour
 
     public float showControlTime = 10;
 
+    private bool showControlInfo;
+
     void Start()
     {
-        StartCoroutine(showControls(player1, player1Controls));
-        StartCoroutine(showControls(player2, player2Controls));
         DontDestroyOnLoad(GameObject.Find("Canvas"));
+        showControlInfo = false;
+        player1Controls.text = "";
+        player2Controls.text = "";
     }
 
     // Update is called once per frame
@@ -41,9 +44,26 @@ public class MainSceneController : MonoBehaviour
             GameObject.Destroy(player2Image);
             SceneManager.LoadScene(endScene, LoadSceneMode.Single);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) toggleControls();
     }
 
-    private IEnumerator showControls(GameObject player, Text text)
+    private void toggleControls()
+    {
+        if (showControlInfo)
+        {
+            player1Controls.text = "";
+            player2Controls.text = "";
+            showControlInfo = false;
+        } else
+        {
+            player1Controls.text = getControlText(player1);
+            player2Controls.text = getControlText(player2);
+            showControlInfo = true;
+        }
+    }
+
+    private string getControlText(GameObject player)
     {
         string controlText = "";
         playerEngine eng = player.GetComponent<playerEngine>();
@@ -62,8 +82,6 @@ public class MainSceneController : MonoBehaviour
         controlText += "Pull: " + spec.pullKey + "\n";
         controlText += "HookShot Left: " + hook.hookshotLeftKey + "\n";
         controlText += "HookShot Right: " + hook.hookshotRightKey + "\n";
-        text.text = controlText;
-        yield return new WaitForSeconds(showControlTime);
-        text.text = "";
+        return controlText;
     }
 }
