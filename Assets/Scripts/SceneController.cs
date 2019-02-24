@@ -7,11 +7,9 @@ public class SceneController : MonoBehaviour
 {
     public string gameSceneName;
 
-    private AssetBundle myLoadedAssetBundle;
 
     void Start()
     {
-        myLoadedAssetBundle = AssetBundle.LoadFromFile("Assets/Scenes");
     }
 
     // Update is called once per frame
