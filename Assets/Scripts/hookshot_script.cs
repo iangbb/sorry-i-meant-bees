@@ -7,6 +7,7 @@ public class hookshot_script : MonoBehaviour
     public KeyCode hookshotLeftKey;
     public KeyCode hookshotRightKey;
     public LineRenderer line;
+    public LineRenderer lineMiss;
     DistanceJoint2D joint;
     Vector3 targetPos;
     RaycastHit2D hit;
@@ -17,25 +18,46 @@ public class hookshot_script : MonoBehaviour
     public bool hookshotEnabled = true;
     KeyCode[] controls;
 
+    public int showMissTime = 100;
+    private int showMissCount = 0;
+    private bool missed = false;
+
 
     void Start()
     {
         joint = GetComponent<DistanceJoint2D>();
         joint.enabled = false;
         line.enabled = false;
+        lineMiss.enabled = false;
         hookshotEnabled = true;
         controls = new KeyCode[] { hookshotLeftKey, hookshotRightKey };
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        if (missed)
+        {
+            print("missed is true, setting showMissCount to 0");
+            showMissCount = 0;
+            missed = false;
+        }
+        print(showMissCount);
+        if (showMissCount > showMissTime)
+        {
+            lineMiss.enabled = false;
+        }
+        else
+        {
+            showMissCount += 1;
+        }
         for (int i = 0; i < controls.Length; i++)
         {
             if (Input.GetKeyDown(controls[i]) && hookshotEnabled)
             {
                 joint.enabled = false;
                 line.enabled = false;
+                lineMiss.enabled = false;
                 // get direction of player
                 Vector3 playerDirection = transform.up;
                 Vector3 lookDirection;
@@ -81,7 +103,16 @@ public class hookshot_script : MonoBehaviour
                             line.SetPosition(0, transform.position);
                             line.SetPosition(1, hit.collider.transform.position);
                         }
+                        else //show missed line
+                        {
+                            lineMiss.enabled = true;                           
+                            Vector3 farLeftPosition = transform.position + distance * lookDirection; 
+                            lineMiss.SetPosition(0, transform.position);
+                            lineMiss.SetPosition(1, farLeftPosition);
+                            missed = true;
+                        }
                     }
+                    
                 }
             }
 
@@ -104,7 +135,9 @@ public class hookshot_script : MonoBehaviour
                 line.enabled = false;
             }
         }
+
     }
+
 
     public void setHookShotEnabled(bool w) { hookshotEnabled = w; }
 
