@@ -27,9 +27,11 @@ public class boundary_script : MonoBehaviour
             Vector3 pos = rb.transform.position;
 
             if (Mathf.Abs(pos.x) > width / 2)
-                rb.transform.position = new Vector3(pos.x * (-1) + (pos.x > 0 ? boundaryIncrement : -boundaryIncrement), pos.y, pos.z);
+                rb.transform.position = new Vector3(pos.x * (-1) + (pos.x > 0 ? boundaryIncrement : -boundaryIncrement),
+                    pos.y, pos.z);
             if (Mathf.Abs(pos.y) > height / 2)
-                rb.transform.position = new Vector3(pos.x, pos.y * (-1) + (pos.y > 0 ? boundaryIncrement : -boundaryIncrement), pos.z);
+                rb.transform.position = new Vector3(pos.x,
+                    pos.y * (-1) + (pos.y > 0 ? boundaryIncrement : -boundaryIncrement), pos.z);
         }
     }
 }
