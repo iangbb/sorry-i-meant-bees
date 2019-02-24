@@ -77,7 +77,7 @@ public class hookshot_script : MonoBehaviour
                     line.SetPosition(1, hit.collider.transform.position);
                 }
             }
-            
+
             if (Input.GetKeyUp(controls[i]) || (joint.connectedBody == null && Input.GetKey(controls[i])))
             {
                 joint.enabled = false;
