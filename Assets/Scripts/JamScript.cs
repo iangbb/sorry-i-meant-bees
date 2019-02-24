@@ -21,8 +21,10 @@ public abstract class JamScript : MonoBehaviour
     {
         GameObject collided = coll.gameObject;
         if (collided.CompareTag("Player"))
+        {
             JamEffect(collided);
-        
+            GetComponent<JamAudio>().setHit(true);
+        }
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
     }
