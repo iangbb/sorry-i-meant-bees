@@ -71,7 +71,7 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         introText.text = "...";
         yield return new WaitForSeconds(waitTime);
-        introText.text = "...to move at a high speed.";
+        introText.text = "...to go FAST.";
         yield return new WaitForSeconds(waitTime);
         introText.text = "";
         yield return new WaitForSeconds(waitTime);
