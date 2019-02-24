@@ -69,28 +69,32 @@ public class playerEngine : MonoBehaviour
         if (!nothing) {
             if (to_go_dir <= 67.5 || to_go_dir >= 292.5)
             {
-                anim.SetBool("Up", true);
+                
             }
             if (to_go_dir >= 22.5 && to_go_dir <= 157.5)
             {
-                anim.SetBool("Right", true);
+                
             }
             if (to_go_dir >= 202.5 && to_go_dir <= 337.5)
             {
-                anim.SetBool("Left", true);
+                
             }
         }
 
-        if (pressed[2]) {
+        if (pressed[2]) { //left
+            anim.SetBool("Left", true);
             rb.AddForce(-hor * force * Phaser(rb.velocity, -hor) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
-        if (pressed[3]) {
+        if (pressed[3]) { //right
+            anim.SetBool("Right", true);
             rb.AddForce(hor * force * Phaser(rb.velocity, hor) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
-        if (pressed[0]) {
+        if (pressed[0]) { //up
+            anim.SetBool("Up", true);
             rb.AddForce(ver * force * Phaser(rb.velocity, ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
-        if (pressed[1]) {
+        if (pressed[1]) { //down          
+            anim.SetBool("Down", true);
             rb.AddForce(-ver * force * Phaser(rb.velocity, -ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
 
