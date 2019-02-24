@@ -11,9 +11,15 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/shower.unity
     guid: b5a30f92c14a841748cb5f4ab418bf53
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/715709b72078ae04bac830f9e4954c4b
+    guid: 715709b72078ae04bac830f9e4954c4b
+  - enabled: 1
+    path: Assets/Scenes/TitleScene.unity
+    guid: 1c975c83d9a009a4b9100f5e11f16d31
   - enabled: 1
     path: Assets/Scenes/Galaxy1.unity
-    guid: 715709b72078ae04bac830f9e4954c4b
+    guid: f1e635a6a41ee96488a296c59000cdd9
   - enabled: 1
     path: Assets/Scenes/EndScene.unity
     guid: f26ef64a826523940a99c559eaf3420f
