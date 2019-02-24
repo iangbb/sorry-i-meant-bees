@@ -36,6 +36,7 @@ public class playerEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // reset animations
         anim.SetBool("Left", false);
         anim.SetBool("Right", false);
         anim.SetBool("Up", false);
@@ -49,35 +50,14 @@ public class playerEngine : MonoBehaviour
         bool[] pressed = new bool[] { false, false, false, false };
         Vector2 to_go_vec = rb.transform.up;
 
+
+        //get pressed keys
         bool nothing = true;
         for (int i = 0; i < arrows.Length; i++) {
             if (Input.GetKey(arrows[i])) {
                 nothing = false;
                 pressed[i] = true;
                 to_go_vec += indications[i];
-            }
-        }
-
-        float to_go_dir = Vector2.Angle(rb.velocity, to_go_vec);
-        Vector3 cross = Vector3.Cross(rb.velocity, to_go_vec);
-
-        if (cross.z > 0)
-            to_go_dir = 360 - to_go_dir;
-
-
-
-        if (!nothing) {
-            if (to_go_dir <= 67.5 || to_go_dir >= 292.5)
-            {
-                
-            }
-            if (to_go_dir >= 22.5 && to_go_dir <= 157.5)
-            {
-                
-            }
-            if (to_go_dir >= 202.5 && to_go_dir <= 337.5)
-            {
-                
             }
         }
 
@@ -98,10 +78,11 @@ public class playerEngine : MonoBehaviour
             rb.AddForce(-ver * force * Phaser(rb.velocity, -ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
 
-        age += (ageSpeed / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
-
-        if (!anim.GetBool("Left") && !anim.GetBool("Right") && !anim.GetBool("Up") && !anim.GetBool("Down"))
+        if (nothing)
             anim.SetBool("Idle", true);
+
+        age += (ageSpeed / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
+        rb.freezeRotation = true;
 
         /*
         correcting = false;
@@ -141,13 +122,13 @@ public class playerEngine : MonoBehaviour
             transform.Rotate((Vector3.forward * 5) / ((time_differential + (float)1.5) * (time_differential + (float)1.5)));
         }
         */
-
+        
         float time_differential = Time.time - collision_time;
         Vector3 dir;
         Vector3 crossProd;
         float theta;
 
-        if (rb.velocity != Vector2.zero && (time_differential) > 3.5) {
+        if (rb.velocity != Vector2.zero) {
             Vector3 vectorToTarget = rb.velocity - (Vector2)transform.forward;
             float angle = Mathf.Atan2(-vectorToTarget.x, vectorToTarget.y) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -174,6 +155,7 @@ public class playerEngine : MonoBehaviour
             transform.Rotate(new Vector3(0,0,(float)(theta / (3.75 - time_differential)) * Time.deltaTime));
             //transform.Rotate((Vector3.forward * 5) / ((time_differential + (float)1.5) * (time_differential + (float)1.5)));
         }
+        
 
         hardCapSpeed();
 
