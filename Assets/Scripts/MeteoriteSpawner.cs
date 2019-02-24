@@ -45,7 +45,6 @@ public class MeteoriteSpawner : MonoBehaviour
             
             // Randomly select a prefab
             int meteor = Random.Range(0, meteorPrefabs.Length);
-            Debug.Log(meteor);
             GameObject meteorite = meteorPrefabs[meteor];
 
             if (edge % 2 == 0)
