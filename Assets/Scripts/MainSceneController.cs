@@ -15,6 +15,9 @@ public class MainSceneController : MonoBehaviour
     public Text player1Controls;
     public Text player2Controls;
 
+    public GameObject player1Image;
+    public GameObject player2Image;
+
     public float showControlTime = 10;
 
     void Start()
