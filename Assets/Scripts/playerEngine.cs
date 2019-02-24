@@ -223,6 +223,7 @@ public class playerEngine : MonoBehaviour
         pre_collision_time = collision_time;
         collision_time = Time.time;
         rb.velocity /= 4;
+        GetComponent<CollisionAudio>().setHit(true);
     }
 
     private void hardCapSpeed()
