@@ -23,7 +23,7 @@ public class hookshot_script : MonoBehaviour
         joint = GetComponent<DistanceJoint2D>();
         joint.enabled = false;
         line.enabled = false;
-        hookshotEnabled = true;
+        hookshotEnabled = false;
         controls = new KeyCode[] { hookshotLeftKey, hookshotRightKey };
     }
 
