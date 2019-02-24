@@ -42,6 +42,7 @@ public class SceneController : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         introText.text = "A long time ago,\nin a galaxy far far away...";
+        ready = true;
         yield return new WaitForSeconds(waitTime);
         introText.text = "...there were these twins...";
         player2.SetActive(true);
@@ -87,6 +88,5 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         introText.transform.position -= new Vector3(0, 10, 0);
         introText.text = "Press space to start.";
-        ready = true;
     }
 }

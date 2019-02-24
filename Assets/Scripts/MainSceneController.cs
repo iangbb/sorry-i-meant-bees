@@ -37,11 +37,13 @@ public class MainSceneController : MonoBehaviour
         {
             GameObject.DontDestroyOnLoad(player2);
             GameObject.Destroy(player1Image);
+            GameObject.Destroy(GameObject.Find("MeteorShowerAlertText"));
             SceneManager.LoadScene(endScene, LoadSceneMode.Single);
         }else if (player2.GetComponent<playerEngine>().getAge() > 115)
         {
             GameObject.DontDestroyOnLoad(player1);
             GameObject.Destroy(player2Image);
+            GameObject.Destroy(GameObject.Find("MeteorShowerAlertText"));
             SceneManager.LoadScene(endScene, LoadSceneMode.Single);
         }
 
