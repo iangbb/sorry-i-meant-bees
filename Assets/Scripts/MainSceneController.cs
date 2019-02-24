@@ -24,6 +24,7 @@ public class MainSceneController : MonoBehaviour
     {
         StartCoroutine(showControls(player1, player1Controls));
         StartCoroutine(showControls(player2, player2Controls));
+        DontDestroyOnLoad(GameObject.Find("Canvas"));
     }
 
     // Update is called once per frame
@@ -32,10 +33,12 @@ public class MainSceneController : MonoBehaviour
         if (player1.GetComponent<playerEngine>().getAge() > 115)
         {
             GameObject.DontDestroyOnLoad(player2);
+            GameObject.Destroy(player1Image);
             SceneManager.LoadScene(endScene, LoadSceneMode.Single);
         }else if (player2.GetComponent<playerEngine>().getAge() > 115)
         {
             GameObject.DontDestroyOnLoad(player1);
+            GameObject.Destroy(player2Image);
             SceneManager.LoadScene(endScene, LoadSceneMode.Single);
         }
     }
