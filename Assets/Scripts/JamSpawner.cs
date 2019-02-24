@@ -40,7 +40,7 @@ public class JamSpawner : MonoBehaviour
             }
             else
             {
-                GameObject jam = jams[Random.Range(0, 2)];
+                GameObject jam = jams[Random.Range(0, jams.Count)];
                 GameObject newJam = Instantiate(jam, new Vector2(posX, posY), new Quaternion());
                 print(newJam);
             }
