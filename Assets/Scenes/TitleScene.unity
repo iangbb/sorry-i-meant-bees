@@ -226,6 +226,7 @@ MonoBehaviour:
   title: {fileID: 46119869}
   player1: {fileID: 1375898993}
   player2: {fileID: 870603316}
+  titleImage: {fileID: 1572431205}
 --- !u!212 &664147521
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -923,7 +924,7 @@ GameObject:
   - component: {fileID: 1572431207}
   - component: {fileID: 1572431206}
   m_Layer: 0
-  m_Name: background (1)
+  m_Name: TitlePhoto
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
