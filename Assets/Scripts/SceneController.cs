@@ -19,7 +19,7 @@ public class SceneController : MonoBehaviour
 
     public GameObject titleImage;
 
-    public const float waitTime = 1f;
+    public const float waitTime = 3f;
 
     void Start()
     {
@@ -58,7 +58,7 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         introText.text = "After competing over fame,\nmoney and power...";
         yield return new WaitForSeconds(waitTime);
-        introText.text = "...and some other things\nwhich I don't say here...";
+        introText.text = "...and some other things\nwhich I don't dare say...";
         yield return new WaitForSeconds(waitTime);
         introText.text = "...they needed some\nnew challenges.";
         yield return new WaitForSeconds(waitTime);
@@ -76,7 +76,7 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         introText.text = "...";
         yield return new WaitForSeconds(waitTime);
-        introText.text = "...to go FAST.";
+        introText.text = "...GO FAST!!!";
         yield return new WaitForSeconds(waitTime);
         introText.text = "";
         yield return new WaitForSeconds(waitTime);
