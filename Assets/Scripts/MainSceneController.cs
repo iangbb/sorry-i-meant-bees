@@ -32,11 +32,23 @@ public class MainSceneController : MonoBehaviour
     {
         string controlText = "";
         playerEngine eng = player.GetComponent<playerEngine>();
+        portal_activate por = player.GetComponent<portal_activate>();
+        player_special_powers spec = player.GetComponent<player_special_powers>();
+        hookshot_script hook = player.GetComponent<hookshot_script>();
         controlText += "Up: " + eng.up + "\n";
         controlText += "Left: " + eng.left + "\n";
         controlText += "Right: " + eng.right + "\n";
         controlText += "Down: " + eng.down + "\n";
+        controlText += "Jams\n";
+        controlText += "Portal: " + por.portalKey + "\n";
+        controlText += "- Weight: " + spec.levitateKey + "\n";
+        controlText += "+ Weight: " + spec.antiLeviKey + "\n";
+        controlText += "Push: " + spec.pushKey + "\n";
+        controlText += "Pull: " + spec.pullKey + "\n";
+        controlText += "HookShot Left: " + hook.hookshotLeftKey + "\n";
+        controlText += "HookShot Right: " + hook.hookshotRightKey + "\n";
         text.text = controlText;
         yield return new WaitForSeconds(showControlTime);
+        text.text = "";
     }
 }
