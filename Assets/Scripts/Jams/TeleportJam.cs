@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class TeleportJam : JamScript
 {
+    
     private bool started = false;
     private GameObject player;
 
-    public override void jamEffect(GameObject collidedPlayer)
+    public override void JamEffect(GameObject collidedPlayer)
     {
         player = collidedPlayer;
         player.GetComponent<portal_activate>().setPortalEnabled(true);
