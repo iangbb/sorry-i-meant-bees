@@ -8,8 +8,6 @@ public class JamSpawner : MonoBehaviour
     public float maxSpawnInterval = 4;
 
     public List<GameObject> jams;
-    public GameObject teleportJam;
-    public float teleportJamProb = 0.1f;
 
     private float width;
     private float height;
@@ -36,16 +34,9 @@ public class JamSpawner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(minSpawnInterval, maxSpawnInterval));
             float posX = Random.Range(-width / 2, width / 2);
             float posY = Random.Range(-height / 2, height / 2);
+            GameObject jam = jams[Random.Range(0, jams.Count)];
+            GameObject newJam = Instantiate(jam, new Vector2(posX, posY), new Quaternion());
 
-            if (!tel && Random.Range(0, 1) < teleportJamProb)
-            {
-                tel = Instantiate(teleportJam, new Vector2(posX, posY), new Quaternion());
-            }
-            else
-            {
-                GameObject jam = jams[Random.Range(0, jams.Count)];
-                GameObject newJam = Instantiate(jam, new Vector2(posX, posY), new Quaternion());
-            }
         }
     }
 }
