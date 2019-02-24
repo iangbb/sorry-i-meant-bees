@@ -12,7 +12,7 @@ public class hookshot_script : MonoBehaviour
     private RaycastHit2D hit;
     public float distance = 1000f;
     public LayerMask mask;
-    public float step = 0.2f;
+    public float wideRaysAngle=2.0f;
 
     public bool hookshotEnabled = true;
     private KeyCode[] controls;
@@ -60,6 +60,34 @@ public class hookshot_script : MonoBehaviour
                     line.enabled = true;
                     line.SetPosition(0, transform.position);
                     line.SetPosition(1, hit.collider.transform.position);
+                }
+                else
+                {
+                    hit = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, wideRaysAngle) * lookDirection, distance, mask);
+                    if (hit.collider != null && hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
+                    {
+                        joint.enabled = true;
+                        joint.connectedBody = hit.collider.gameObject.GetComponent<Rigidbody2D>();
+                        joint.distance = Vector2.Distance(transform.position, hit.collider.transform.position);
+
+                        line.enabled = true;
+                        line.SetPosition(0, transform.position);
+                        line.SetPosition(1, hit.collider.transform.position);
+                    }
+                    else
+                    {
+                        hit = Physics2D.Raycast(transform.position, Quaternion.Euler(0, 0, -wideRaysAngle) * lookDirection, distance, mask);
+                        if (hit.collider != null && hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
+                        {
+                            joint.enabled = true;
+                            joint.connectedBody = hit.collider.gameObject.GetComponent<Rigidbody2D>();
+                            joint.distance = Vector2.Distance(transform.position, hit.collider.transform.position);
+
+                            line.enabled = true;
+                            line.SetPosition(0, transform.position);
+                            line.SetPosition(1, hit.collider.transform.position);
+                        }
+                    }
                 }
             }
 
