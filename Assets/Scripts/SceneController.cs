@@ -43,6 +43,7 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(2);
         introText.text = "A long time ago,\nin a galaxy far far away...";
         yield return new WaitForSeconds(waitTime);
+        GetComponent<IntroMusic>().setReady(true);
         introText.text = "...there were these twins...";
         player2.SetActive(true);
         yield return new WaitForSeconds(waitTime);
