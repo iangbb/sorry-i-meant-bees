@@ -23,7 +23,7 @@ public class hookshot_script : MonoBehaviour
         joint = GetComponent<DistanceJoint2D>();
         joint.enabled = false;
         line.enabled = false;
-        hookshotEnabled = false;
+        hookshotEnabled = true;
         controls = new KeyCode[] { hookshotLeftKey, hookshotRightKey };
     }
 
@@ -70,7 +70,6 @@ public class hookshot_script : MonoBehaviour
                     line.SetPosition(1, hit.collider.transform.position);
                 }
             }
-            Debug.Log(joint.connectedBody);
             if (Input.GetKeyUp(controls[i]) || (joint.connectedBody == null && Input.GetKey(controls[i])))
             {
                 joint.enabled = false;

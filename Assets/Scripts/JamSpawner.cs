@@ -36,13 +36,11 @@ public class JamSpawner : MonoBehaviour
             if (!tel && Random.Range(0, 1) < teleportJamProb)
             {
                 tel = Instantiate(teleportJam, new Vector2(posX, posY), new Quaternion());
-                print(tel);
             }
             else
             {
                 GameObject jam = jams[Random.Range(0, 2)];
                 GameObject newJam = Instantiate(jam, new Vector2(posX, posY), new Quaternion());
-                print(newJam);
             }
             spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval);
         }
