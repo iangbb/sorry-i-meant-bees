@@ -30,7 +30,7 @@ public class speed_display : MonoBehaviour
         {
             yield return new WaitForSeconds(0.2f);
             int speed = (int) (playerInfoComponent.speed * 100);
-            speedText.text = "Speed: " + speed;
+            speedText.text = "SPEED: " + speed;
         }
     }
 }
