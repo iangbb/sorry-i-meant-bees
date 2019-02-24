@@ -18,7 +18,8 @@ public class MainSceneController : MonoBehaviour
 
     void Start()
     {
-        
+        StartCoroutine(showControls(player1, player1Controls));
+        StartCoroutine(showControls(player2, player2Controls));
     }
 
     // Update is called once per frame
@@ -29,6 +30,13 @@ public class MainSceneController : MonoBehaviour
 
     private IEnumerator showControls(GameObject player, Text text)
     {
+        string controlText = "";
+        playerEngine eng = player.GetComponent<playerEngine>();
+        controlText += "Up: " + eng.up + "\n";
+        controlText += "Left: " + eng.left + "\n";
+        controlText += "Right: " + eng.right + "\n";
+        controlText += "Down: " + eng.down + "\n";
+        text.text = controlText;
         yield return new WaitForSeconds(showControlTime);
     }
 }
