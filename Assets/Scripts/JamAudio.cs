@@ -6,6 +6,7 @@ public class JamAudio : MonoBehaviour
     public AudioClip clip;
     public AudioSource source;
     public bool hit = false;
+    public float volume = 0.1f;
 
     // Use this for initialization
     void Start()
@@ -22,7 +23,7 @@ public class JamAudio : MonoBehaviour
     {
         if (hit)
         {
-            source.PlayOneShot(clip);
+            source.PlayOneShot(clip, volume);
             hit = false;
         }
     }

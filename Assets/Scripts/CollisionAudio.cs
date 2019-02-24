@@ -7,6 +7,7 @@ public class CollisionAudio : MonoBehaviour
     public AudioSource source;
     public bool hit = false;
     float prev_time;
+    public float volume = 0.1f;
 
     // Use this for initialization
     void Start()
@@ -23,7 +24,7 @@ public class CollisionAudio : MonoBehaviour
     {
         if (hit && Time.time - prev_time > 1)
         {
-            source.PlayOneShot(clip);
+            source.PlayOneShot(clip, volume);
             hit = false;
             prev_time = Time.time;
         }
