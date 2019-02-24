@@ -224,7 +224,8 @@ MonoBehaviour:
   gameSceneName: Galaxy1
   introText: {fileID: 1068559531}
   title: {fileID: 46119869}
-  ready: 0
+  player1: {fileID: 1375898993}
+  player2: {fileID: 870603316}
 --- !u!212 &664147521
 SpriteRenderer:
   m_ObjectHideFlags: 0
