@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class TeleportJam : JamScript
 {
-    private bool started = false;
+    
     private GameObject player;
 
-    public override void jamEffect(GameObject collidedPlayer)
+    public override void JamEffect(GameObject collidedPlayer)
     {
         player = collidedPlayer;
         player.GetComponent<portal_activate>().setPortalEnabled(true);
-        print("Teleport your Enemies with this JAM!!!!!!!");
-        started = true;
+        print("Teleport your Enemies with this JAM!!!!!!!");;
     }
 
     // Start is called before the first frame update
@@ -29,7 +28,6 @@ public class TeleportJam : JamScript
             //TODO Respawn
             print("Destroying " + gameObject);
             GameObject.Destroy(gameObject);
-            started = false;
         }
     }
 }

@@ -8,12 +8,13 @@ public class WeightJamScript : JamScript
     private bool started = false;
     private GameObject player;
 
-    public override void jamEffect(GameObject playerCollided)
+    public override void JamEffect(GameObject playerCollided)
     {
         player = playerCollided;
         player.GetComponent<player_special_powers>().setWeightEnabled(true);
         print("Change your weight with the power of this JAM!!!!!");
         started = true;
+        StartCoroutine(UseJam());
     }
 
     // Start is called before the first frame update
@@ -25,15 +26,14 @@ public class WeightJamScript : JamScript
     // Update is called once per frame
     void Update()
     {
-        if (started)
-        {
-            useTime -= Time.deltaTime;
-            if (useTime < 0)
-            {
-                player.GetComponent<player_special_powers>().setWeightEnabled(false);
-                GameObject.Destroy(gameObject);
-                started = false;
-            }
-        }
+        
+    }
+
+    private IEnumerator UseJam()
+    {
+        yield return new WaitForSeconds(useTime);
+        player.GetComponent<player_special_powers>().setWeightEnabled(false);
+        GameObject.Destroy(gameObject);
+        started = false;
     }
 }
