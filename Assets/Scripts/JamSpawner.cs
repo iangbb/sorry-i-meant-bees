@@ -36,7 +36,6 @@ public class JamSpawner : MonoBehaviour
             if (!tel && Random.Range(0, 1) < teleportJamProb)
             {
                 tel = Instantiate(teleportJam, new Vector2(posX, posY), new Quaternion());
-                print(tel);
             }
             else
             {
