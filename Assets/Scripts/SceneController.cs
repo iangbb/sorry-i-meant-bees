@@ -17,7 +17,9 @@ public class SceneController : MonoBehaviour
     public GameObject player1;
     public GameObject player2;
 
-    public const float waitTime = 3f;
+    public GameObject titleImage;
+
+    public const float waitTime = 1f;
 
     void Start()
     {
@@ -26,6 +28,7 @@ public class SceneController : MonoBehaviour
         title.text = "";
         player2.SetActive(false);
         player1.SetActive(false);
+        titleImage.SetActive(false);
         StartCoroutine(showIntro());
     }
 
@@ -85,9 +88,11 @@ public class SceneController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         introText.text = "";
         yield return new WaitForSeconds(waitTime);
-        title.text = "Twin Paradox";
+        titleImage.SetActive(true);
+        player1.SetActive(false);
+        player2.SetActive(false);
         yield return new WaitForSeconds(waitTime);
-        introText.transform.position -= new Vector3(0, 10, 0);
+        introText.transform.position -= new Vector3(0, 20, 0);
         introText.text = "Press space to start.";
     }
 }
