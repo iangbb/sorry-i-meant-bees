@@ -996,7 +996,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 55
-  step: 0.2
+  wideRaysAngle: 2
   hookshotEnabled: 1
 --- !u!114 &900355291
 MonoBehaviour:
@@ -1797,7 +1797,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 55
-  step: 0.2
+  wideRaysAngle: 10
   hookshotEnabled: 1
 --- !u!114 &1970897274
 MonoBehaviour:
