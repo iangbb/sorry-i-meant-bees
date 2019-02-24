@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class portal_activate : MonoBehaviour
 {
+    
     public KeyCode portalKey;
     public Transform portalIn;
     public Transform portalOut;
 
-
     private List<GameObject> otherPlayers;
-    float x;
-    float y;
+    private float x;
+    private float y;
 
     public bool portalEnabled;
 
@@ -48,7 +48,13 @@ public class portal_activate : MonoBehaviour
         }
     }
 
-    public void setPortalEnabled(bool w) { portalEnabled = w; }
+    public void setPortalEnabled(bool w)
+    {
+        portalEnabled = w;
+    }
 
-    public bool getPortalEnabled() { return portalEnabled; }
+    public bool getPortalEnabled()
+    {
+        return portalEnabled;
+    }
 }

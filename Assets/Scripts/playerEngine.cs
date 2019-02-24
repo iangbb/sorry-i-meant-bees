@@ -118,7 +118,6 @@ public class playerEngine : MonoBehaviour
             Vector3 vectorToTarget = rb.velocity - (Vector2)transform.forward;
             float angle = Mathf.Atan2(-vectorToTarget.x, vectorToTarget.y) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 100);
             if (angle < 1) {
                 correcting = false;
             }
@@ -137,7 +136,6 @@ public class playerEngine : MonoBehaviour
             dir = transform.rotation * new Vector3(1,1,1);
             theta = Vector2.Angle(rb.velocity, dir);
             transform.Rotate(new Vector3(0,0,(float)(theta / (3.75 - timeDifferential)) * Time.deltaTime));
-            //transform.Rotate((Vector3.forward * 5) / ((time_differential + (float)1.5) * (time_differential + (float)1.5)));
         }
 
         hardCapSpeed();
