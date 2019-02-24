@@ -3,7 +3,6 @@ using UnityEngine.UI;
 
 public class age_display : MonoBehaviour
 {
-    public int age;
     public Text ageText;
     public playerEngine playerScript;
     public int player;
@@ -17,7 +16,6 @@ public class age_display : MonoBehaviour
     
     void Update()
     {
-        age = (int)playerScript.getAge();
-        ageText.text = "" + age;
+        ageText.text = ((int) playerScript.getAge()).ToString();
     }
 }

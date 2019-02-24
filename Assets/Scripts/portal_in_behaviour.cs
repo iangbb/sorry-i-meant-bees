@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class portal_in_behaviour : MonoBehaviour
 {
-    GameObject portalOut;
-    Vector2 outPosition;
+    
+    private GameObject portalOut;
+    private Vector2 outPosition;
+    
     // Start is called before the first frame update
     void Start()
     {

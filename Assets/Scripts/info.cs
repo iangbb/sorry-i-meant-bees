@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class info : MonoBehaviour
 {
-    public float mass = 1;
-    public float speed = 0;
-    Vector2 lastPosition = Vector2.zero;
+    public float mass;
+    public float speed;
+    
+    private Vector2 lastPosition = Vector2.zero;
+    private Rigidbody2D body;
+    
     // Start is called before the first frame update
     void Start()
     {
+        body = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -19,7 +23,7 @@ public class info : MonoBehaviour
     }
     void FixedUpdate()
     {
-        speed = gameObject.GetComponent<Rigidbody2D>().velocity.magnitude;
+        speed = body.velocity.magnitude;
     }
 }
 

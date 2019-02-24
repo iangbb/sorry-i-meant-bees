@@ -14,16 +14,20 @@ public class MeteoriteController : MonoBehaviour
         GameObject cont = GameObject.FindGameObjectWithTag("GameController");
         width = cont.GetComponent<boundary_script>().width;
         height = cont.GetComponent<boundary_script>().height;
+        StartCoroutine(ControlMeteorLifetime());
     }
 
     // Update is called once per frame
     void Update()
     {
-        lifeTime -= Time.deltaTime;
-        if (lifeTime < 0) GameObject.Destroy(gameObject);
-
         Vector2 pos = gameObject.transform.position;
+        if (Mathf.Abs(pos.x) > width / 2 + 10 || Mathf.Abs(pos.y) > height / 2 + 10)
+            GameObject.Destroy(gameObject);
+    }
 
-        if (Mathf.Abs(pos.x) > width / 2 + 10 || Mathf.Abs(pos.y) > height / 2 + 10) GameObject.Destroy(gameObject);
+    private IEnumerator ControlMeteorLifetime()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        GameObject.Destroy(gameObject);
     }
 }

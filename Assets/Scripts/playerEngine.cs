@@ -14,23 +14,34 @@ public class playerEngine : MonoBehaviour
     public KeyCode left;
     public KeyCode right;
 
-
     public float force;
     public const float maxSpeed = 8;
     public float ageSpeed = 0.5f; 
 
-    public float collision_time;
-    public float pre_collision_time;
+    public float collisionTime;
+    public float preCollisionTime;
     private bool paralysed;
 
-    bool correcting;
+    private bool correcting;
+
+    private int animLeftId;
+    private int animRightId;
+    private int animUpId;
+    private int animDownId;
+    private int animIdleId;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        collision_time = Time.time - 10;
+        collisionTime = Time.time - 10;
         correcting = false;
+
+        animLeftId = Animator.StringToHash("Left");
+        animRightId = Animator.StringToHash("Right");
+        animUpId = Animator.StringToHash("Up");
+        animDownId = Animator.StringToHash("Down");
+        animIdleId = Animator.StringToHash("Idle");
     }
 
     // Update is called once per frame
@@ -48,7 +59,6 @@ public class playerEngine : MonoBehaviour
         KeyCode[] arrows = new KeyCode[] { up, down, left, right };
         Vector2[] indications = new Vector2[] { ver, -ver, -hor, hor };
         bool[] pressed = new bool[] { false, false, false, false };
-        Vector2 to_go_vec = rb.transform.up;
 
 
         //get pressed keys
@@ -57,7 +67,6 @@ public class playerEngine : MonoBehaviour
             if (Input.GetKey(arrows[i])) {
                 nothing = false;
                 pressed[i] = true;
-                to_go_vec += indications[i];
             }
         }
 
@@ -123,37 +132,32 @@ public class playerEngine : MonoBehaviour
         }
         */
         
-        float time_differential = Time.time - collision_time;
+        float timeDifferential = Time.time - collisionTime;
         Vector3 dir;
-        Vector3 crossProd;
         float theta;
 
         if (rb.velocity != Vector2.zero) {
             Vector3 vectorToTarget = rb.velocity - (Vector2)transform.forward;
             float angle = Mathf.Atan2(-vectorToTarget.x, vectorToTarget.y) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 100);
             if (angle < 1) {
                 correcting = false;
             }
             if (correcting) {
                 dir = transform.rotation * new Vector3(1, 1, 1);
                 theta = Vector2.Angle(rb.velocity, dir);
-                crossProd = Vector3.Cross(rb.velocity, to_go_vec);
                 transform.Rotate(new Vector3(0, 0, (float)(angle * Time.deltaTime)));
             } else  {
                 transform.Rotate(new Vector3(0, 0, (float)(angle * Time.deltaTime)));
                 transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 100);
             }
-        } else if (time_differential <= 1) {
+        } else if (timeDifferential <= 1) {
             correcting = true;
-            transform.Rotate((Vector3.forward * 5) / ((time_differential + (float)1.5) * (time_differential + (float)1.5)));
-        } else if (time_differential <= 3.5) {
+            transform.Rotate((Vector3.forward * 5) / ((timeDifferential + (float)1.5) * (timeDifferential + (float)1.5)));
+        } else if (timeDifferential <= 3.5) {
             dir = transform.rotation * new Vector3(1,1,1);
             theta = Vector2.Angle(rb.velocity, dir);
-            crossProd = Vector3.Cross(rb.velocity, to_go_vec);
-            transform.Rotate(new Vector3(0,0,(float)(theta / (3.75 - time_differential)) * Time.deltaTime));
-            //transform.Rotate((Vector3.forward * 5) / ((time_differential + (float)1.5) * (time_differential + (float)1.5)));
+            transform.Rotate(new Vector3(0,0,(float)(theta / (3.75 - timeDifferential)) * Time.deltaTime));
         }
         
 
@@ -196,26 +200,27 @@ public class playerEngine : MonoBehaviour
 
     }
 
-    float Phaser(Vector2 velocity, Vector2 new_direction)
+    float Phaser(Vector2 velocity, Vector2 newDirection)
     {
         Vector2 direction = velocity / velocity.magnitude;
-        float cos_theta = Vector2.Dot(direction, new_direction) / (direction.magnitude * new_direction.magnitude);
+        float cos_theta = Vector2.Dot(direction, newDirection) / (direction.magnitude * newDirection.magnitude);
         float theta = Mathf.Acos(cos_theta);
-        return 1 + 40 * Mathf.Sin(theta);
+        return 1 + 40 * Mathf.Sin(theta); //CHANGE FOR DIFFERENT ROTATION ABILITY
     }
 
     public void OnCollisionEnter2D()
     {
-        pre_collision_time = collision_time;
-        collision_time = Time.time;
+        preCollisionTime = collisionTime;
+        collisionTime = Time.time;
         rb.velocity /= 4;
+        GetComponent<CollisionAudio>().setHit(true);
     }
 
     private void hardCapSpeed()
     {
         if (rb.velocity.magnitude > maxSpeed)
         {
-            rb.velocity = rb.velocity * (maxSpeed / rb.velocity.magnitude);
+            rb.velocity *= maxSpeed / rb.velocity.magnitude;
         }
     }
 

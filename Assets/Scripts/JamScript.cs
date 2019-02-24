@@ -20,11 +20,14 @@ public abstract class JamScript : MonoBehaviour
     void OnTriggerEnter2D(Collider2D coll)
     {
         GameObject collided = coll.gameObject;
-        print(collided);
-        if (collided.tag == "Player") jamEffect(collided);
+        if (collided.CompareTag("Player"))
+        {
+            JamEffect(collided);
+            GetComponent<JamAudio>().setHit(true);
+        }
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<Collider2D>().enabled = false;
     }
 
-    public abstract void jamEffect(GameObject player);
+    public abstract void JamEffect(GameObject player);
 }

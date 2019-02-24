@@ -11,25 +11,29 @@ public class JamSpawner : MonoBehaviour
     public GameObject teleportJam;
     public float teleportJamProb = 0.1f;
 
-    private float spawnTimer;
     private float width;
     private float height;
     private GameObject tel;
 
     void Start()
     {
-        spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval);
         GameObject cont = GameObject.FindGameObjectWithTag("GameController");
         width = cont.GetComponent<boundary_script>().width;
         height = cont.GetComponent<boundary_script>().height;
+        StartCoroutine(SpawnJams());
     }
 
     // Update is called once per frame
     void Update()
     {
-        spawnTimer -= Time.deltaTime;
-        if (spawnTimer <= 0)
+        
+    }
+
+    private IEnumerator SpawnJams()
+    {
+        while (true)
         {
+            yield return new WaitForSeconds(Random.Range(minSpawnInterval, maxSpawnInterval));
             float posX = Random.Range(-width / 2, width / 2);
             float posY = Random.Range(-height / 2, height / 2);
 
@@ -39,10 +43,9 @@ public class JamSpawner : MonoBehaviour
             }
             else
             {
-                GameObject jam = jams[Random.Range(0, 2)];
+                GameObject jam = jams[Random.Range(0, jams.Count)];
                 GameObject newJam = Instantiate(jam, new Vector2(posX, posY), new Quaternion());
             }
-            spawnTimer = Random.Range(minSpawnInterval, maxSpawnInterval);
         }
     }
 }
