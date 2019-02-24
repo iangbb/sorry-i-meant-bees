@@ -6,19 +6,30 @@ using UnityEngine.UI;
 public class speed_display : MonoBehaviour
 {
 
-    public float speed;
     public Text speedText;
+    public int player;
+
+    private info playerInfoComponent;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerInfoComponent = GameObject.Find("Player " + player).GetComponent<info>();
+        StartCoroutine(DisplaySpeed());
     }
 
     // Update is called once per frame
     void Update()
     {
-        speed = GameObject.Find("Player 1").GetComponent<info>().speed * 1000;
-        speed = (int)speed;
-        speedText.text = "Speed: " + speed;
+        
+    }
+
+    private IEnumerator DisplaySpeed()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.2f);
+            int speed = (int) (playerInfoComponent.speed * 100);
+            speedText.text = "Speed: " + speed;
+        }
     }
 }
