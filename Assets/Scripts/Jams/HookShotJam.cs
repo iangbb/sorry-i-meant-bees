@@ -13,7 +13,7 @@ public class HookShotJam : JamScript
     {
         player = collidedPlayer;
         print("from hookshot " + player);
-        player.GetComponent<hookshot_script>().setHookShotEnabled(true);
+        player.GetComponent<hookshot_script>().SetHookShotEnabled(true);
         print("HOOKSHOT!!!!!!!");
         started = true;
     }
@@ -32,7 +32,7 @@ public class HookShotJam : JamScript
             useTime -= Time.deltaTime;
             if (useTime < 0)
             {
-                player.GetComponent<hookshot_script>().setHookShotEnabled(false);
+                player.GetComponent<hookshot_script>().SetHookShotEnabled(false);
                 print("Destroying " + gameObject);
                 GameObject.Destroy(gameObject);
                 started = false;

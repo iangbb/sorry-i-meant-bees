@@ -7,10 +7,11 @@ public class powers_text : MonoBehaviour
 {
     public int player;
     public Text powersText;
-    portal_activate portalScript;
-    hookshot_script hookshotScript;
-    player_special_powers specialScript;
-    string temp_text;
+    private portal_activate portalScript;
+    private hookshot_script hookshotScript;
+    private player_special_powers specialScript;
+    private string tempText;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -22,15 +23,15 @@ public class powers_text : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        temp_text = "";
+        tempText = "";
         if (portalScript.getPortalEnabled())
-            temp_text += "TELEPORT\n ";
-        if (hookshotScript.getHookShotEnabled())
-            temp_text += "HOOKSHOT\n ";
+            tempText += "TELEPORT\n ";
+        if (hookshotScript.GetHookShotEnabled())
+            tempText += "HOOKSHOT\n ";
         if (specialScript.getWeightEnabled())
-            temp_text += "MASS UP/DOWN\n ";
+            tempText += "MASS UP/DOWN\n ";
         if (specialScript.getPullPushEnabled())
-            temp_text += "PULL/PUSH ";
-        powersText.text = temp_text;
+            tempText += "PULL/PUSH ";
+        powersText.text = tempText;
     }
 }
