@@ -1146,6 +1146,8 @@ MonoBehaviour:
   player2: {fileID: 900355287}
   player1Controls: {fileID: 641079378}
   player2Controls: {fileID: 1017878364}
+  player1Image: {fileID: 1993222185}
+  player2Image: {fileID: 1053828819}
   showControlTime: 10
 --- !u!1 &900355287 stripped
 GameObject:

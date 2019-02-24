@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainSceneController : MonoBehaviour
@@ -14,18 +15,32 @@ public class MainSceneController : MonoBehaviour
     public Text player1Controls;
     public Text player2Controls;
 
+    public GameObject player1Image;
+    public GameObject player2Image;
+
     public float showControlTime = 10;
 
     void Start()
     {
         StartCoroutine(showControls(player1, player1Controls));
         StartCoroutine(showControls(player2, player2Controls));
+        DontDestroyOnLoad(GameObject.Find("Canvas"));
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (player1.GetComponent<playerEngine>().getAge() > 115)
+        {
+            GameObject.DontDestroyOnLoad(player2);
+            GameObject.Destroy(player1Image);
+            SceneManager.LoadScene(endScene, LoadSceneMode.Single);
+        }else if (player2.GetComponent<playerEngine>().getAge() > 115)
+        {
+            GameObject.DontDestroyOnLoad(player1);
+            GameObject.Destroy(player2Image);
+            SceneManager.LoadScene(endScene, LoadSceneMode.Single);
+        }
     }
 
     private IEnumerator showControls(GameObject player, Text text)
