@@ -214,7 +214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1077886928, guid: 193ca60d3e50bbd4680f9f8d044d7d8c, type: 3}
       propertyPath: mass
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 193ca60d3e50bbd4680f9f8d044d7d8c, type: 3}
@@ -530,7 +530,7 @@ PrefabInstance:
     - target: {fileID: 821604958246168529, guid: ef78793396517ac4ab7bc5d10f4e089b,
         type: 3}
       propertyPath: G
-      value: 0.05
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 821604958246168534, guid: ef78793396517ac4ab7bc5d10f4e089b,
         type: 3}
@@ -1899,11 +1899,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 212941414, guid: 68acc88f231fdd944b507f2c63cd7a9c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.93
+      value: -2.86
       objectReference: {fileID: 0}
     - target: {fileID: 212941414, guid: 68acc88f231fdd944b507f2c63cd7a9c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.53
+      value: -2.8
       objectReference: {fileID: 0}
     - target: {fileID: 212941414, guid: 68acc88f231fdd944b507f2c63cd7a9c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2528,7 +2528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2042191539, guid: c0c7ad35f5f52a440a93aa1161c28274, type: 3}
       propertyPath: mass
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0c7ad35f5f52a440a93aa1161c28274, type: 3}
@@ -2791,11 +2791,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1302999686, guid: f18e11f4a94be934aa584390e708ae2c, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 2.53
       objectReference: {fileID: 0}
     - target: {fileID: 1302999686, guid: f18e11f4a94be934aa584390e708ae2c, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 1302999683, guid: f18e11f4a94be934aa584390e708ae2c, type: 3}
       propertyPath: m_Offset.x
@@ -2807,7 +2807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1302999682, guid: f18e11f4a94be934aa584390e708ae2c, type: 3}
       propertyPath: mass
-      value: 8
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1302999685, guid: f18e11f4a94be934aa584390e708ae2c, type: 3}
       propertyPath: m_Sprite
@@ -3284,11 +3284,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 253970621, guid: 2eaf42539618ba64c889aee532542b44, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.06
+      value: -7.6
       objectReference: {fileID: 0}
     - target: {fileID: 253970621, guid: 2eaf42539618ba64c889aee532542b44, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.82
+      value: -1.13
       objectReference: {fileID: 0}
     - target: {fileID: 253970621, guid: 2eaf42539618ba64c889aee532542b44, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3353,7 +3353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 253970617, guid: 2eaf42539618ba64c889aee532542b44, type: 3}
       propertyPath: mass
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2eaf42539618ba64c889aee532542b44, type: 3}
@@ -3372,12 +3372,12 @@ PrefabInstance:
     - target: {fileID: 598196543485683135, guid: 037a240f9b5a2a14ea84cbf2eec402cb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.06
+      value: -6.01
       objectReference: {fileID: 0}
     - target: {fileID: 598196543485683135, guid: 037a240f9b5a2a14ea84cbf2eec402cb,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.82
+      value: 3.42
       objectReference: {fileID: 0}
     - target: {fileID: 598196543485683135, guid: 037a240f9b5a2a14ea84cbf2eec402cb,
         type: 3}
