@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7751737892435312711}
   - component: {fileID: 1414945369594963819}
   - component: {fileID: 1761875162}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: HookShotJam
   m_TagString: Jam
   m_Icon: {fileID: 0}

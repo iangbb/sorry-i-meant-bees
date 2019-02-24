@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8189543893607274024}
   - component: {fileID: 8189543893607274027}
   - component: {fileID: 8189543893607274026}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PullPushJam
   m_TagString: Jam
   m_Icon: {fileID: 0}

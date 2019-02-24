@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6184154338626586296}
   - component: {fileID: 5093499186831848163}
   - component: {fileID: 84315341}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TeleportJam
   m_TagString: Jam
   m_Icon: {fileID: 0}
