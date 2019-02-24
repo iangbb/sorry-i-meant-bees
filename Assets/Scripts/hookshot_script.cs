@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class hookshot_script : MonoBehaviour
 {
-    public KeyCode hookshotKey;
+    public KeyCode hookshotLeftKey;
+    public KeyCode hookshotRightKey;
     public LineRenderer line;
     DistanceJoint2D joint;
     Vector3 targetPos;
     RaycastHit2D hit;
-    public float distance = 100f;
+    public float distance = 1000f;
     public LayerMask mask;
     public float step = 0.2f;
 
-    private bool hookshotEnabled;
+    public bool hookshotEnabled = true;
+    KeyCode[] controls;
 
 
     void Start()
@@ -21,38 +23,47 @@ public class hookshot_script : MonoBehaviour
         joint = GetComponent<DistanceJoint2D>();
         joint.enabled = false;
         line.enabled = false;
-        hookshotEnabled = false;
+        hookshotEnabled = true;
+        controls = new KeyCode[] { hookshotLeftKey, hookshotRightKey };
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(hookshotKey) && hookshotEnabled)
+        for (int i = 0; i < controls.Length; i++)
         {
-            targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            targetPos.z = 0;
-            hit = Physics2D.Raycast(transform.position, targetPos - transform.position, distance, mask);
-            if(hit.collider != null && hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
+            if (Input.GetKeyDown(controls[i]) && hookshotEnabled)
             {
-                joint.enabled = true;
-                joint.connectedBody = hit.collider.gameObject.GetComponent<Rigidbody2D>();
-                joint.distance = Vector2.Distance(transform.position, hit.collider.transform.position);
+                // get direction of player
+                Vector3 playerDirection = transform.up;
+                Vector3 lookDirection;
+                if(i == 0)
+                    lookDirection = Quaternion.Euler(0, 0, 90) * playerDirection;
+                else
+                    lookDirection = Quaternion.Euler(0, 0, -90) * playerDirection;
+                hit = Physics2D.Raycast(transform.position, lookDirection, distance, mask);
+                if (hit.collider != null && hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
+                {
+                    joint.enabled = true;
+                    joint.connectedBody = hit.collider.gameObject.GetComponent<Rigidbody2D>();
+                    joint.distance = Vector2.Distance(transform.position, hit.collider.transform.position);
 
-                line.enabled = true;
-                line.SetPosition(0, transform.position);
-                line.SetPosition(1, hit.collider.transform.position);
+                    line.enabled = true;
+                    line.SetPosition(0, transform.position);
+                    line.SetPosition(1, hit.collider.transform.position);
+                }
             }
-        }
 
-        if (Input.GetKey(hookshotKey))
-        {
-            line.SetPosition(0, transform.position);
-        }
+            if (Input.GetKey(controls[i]))
+            {
+                line.SetPosition(0, transform.position);
+            }
 
-        if (Input.GetKeyUp(hookshotKey))
-        {
-            joint.enabled = false;
-            line.enabled = false;
+            if (Input.GetKeyUp(controls[i]))
+            {
+                joint.enabled = false;
+                line.enabled = false;
+            }
         }
     }
 
