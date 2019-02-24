@@ -34,14 +34,17 @@ public class hookshot_script : MonoBehaviour
         {
             if (Input.GetKeyDown(controls[i]) && hookshotEnabled)
             {
+                joint.enabled = false;
+                line.enabled = false;
                 // get direction of player
                 Vector3 playerDirection = transform.up;
                 Vector3 lookDirection;
-                if(i == 0)
+                if (i == 0)
                     lookDirection = Quaternion.Euler(0, 0, 90) * playerDirection;
                 else
                     lookDirection = Quaternion.Euler(0, 0, -90) * playerDirection;
                 hit = Physics2D.Raycast(transform.position, lookDirection, distance, mask);
+
                 if (hit.collider != null && hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
                 {
                     joint.enabled = true;
@@ -56,10 +59,19 @@ public class hookshot_script : MonoBehaviour
 
             if (Input.GetKey(controls[i]))
             {
-                line.SetPosition(0, transform.position);
-            }
+                if (hit.collider != null && hit.collider.gameObject.GetComponent<Rigidbody2D>() != null)
+                {
+                    joint.enabled = true;
+                    joint.connectedBody = hit.collider.gameObject.GetComponent<Rigidbody2D>();
+                    joint.distance = Vector2.Distance(transform.position, hit.collider.transform.position);
 
-            if (Input.GetKeyUp(controls[i]))
+                    line.enabled = true;
+                    line.SetPosition(0, transform.position);
+                    line.SetPosition(1, hit.collider.transform.position);
+                }
+            }
+            Debug.Log(joint.connectedBody);
+            if (Input.GetKeyUp(controls[i]) || (joint.connectedBody == null && Input.GetKey(controls[i])))
             {
                 joint.enabled = false;
                 line.enabled = false;
