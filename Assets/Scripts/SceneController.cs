@@ -19,7 +19,7 @@ public class SceneController : MonoBehaviour
         ready = false;
         introText.text = "";
         title.text = "";
-        showIntro();
+        StartCoroutine(showIntro());
     }
 
     // Update is called once per frame
@@ -31,8 +31,9 @@ public class SceneController : MonoBehaviour
         }
     }
 
-    private void showIntro()
+    private IEnumerator showIntro()
     {
-        introText.text = "A long time ago, in a galaxy far far away...";
+        yield return new WaitForSeconds(3);
+        introText.text = "A long time ago,\nin a galaxy far far away...";
     }
 }
