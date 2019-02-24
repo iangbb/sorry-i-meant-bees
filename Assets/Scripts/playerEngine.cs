@@ -47,74 +47,96 @@ public class playerEngine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        anim.SetBool(animLeftId, false);
-        anim.SetBool(animRightId, false);
-        anim.SetBool(animUpId, false);
-        anim.SetBool(animDownId, false);
+        // reset animations
+        anim.SetBool("Left", false);
+        anim.SetBool("Right", false);
+        anim.SetBool("Up", false);
+        anim.SetBool("Down", false);
 
-        Vector2 hor = new Vector2(1, 0);
-        Vector2 ver = new Vector2(0, 1);
+        Vector2 hor = rb.transform.right;
+        Vector2 ver = rb.transform.up;
 
         KeyCode[] arrows = new KeyCode[] { up, down, left, right };
         Vector2[] indications = new Vector2[] { ver, -ver, -hor, hor };
         bool[] pressed = new bool[] { false, false, false, false };
-        Vector2 toGoVec = new Vector2(0, 0);
 
+
+        //get pressed keys
         bool nothing = true;
         for (int i = 0; i < arrows.Length; i++) {
             if (Input.GetKey(arrows[i])) {
                 nothing = false;
                 pressed[i] = true;
-                toGoVec += indications[i];
             }
         }
 
-        float toGoDir = Vector2.Angle(rb.velocity, toGoVec);
-        Vector3 cross = Vector3.Cross(rb.velocity, toGoVec);
-
-        if (cross.z > 0)
-            toGoDir = 360 - toGoDir;
-
-
-
-        if (!nothing) {
-            if (toGoDir <= 67.5 || toGoDir >= 292.5)
-            {
-                anim.SetBool(animUpId, true);
-            }
-            if (toGoDir >= 22.5 && toGoDir <= 157.5)
-            {
-                anim.SetBool(animRightId, true);
-            }
-            if (toGoDir >= 202.5 && toGoDir <= 337.5)
-            {
-                anim.SetBool(animLeftId, true);
-            }
-        }
-
-        if (pressed[2]) {
+        if (pressed[2]) { //left
+            anim.SetBool("Left", true);
             rb.AddForce(-hor * force * Phaser(rb.velocity, -hor) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
-        if (pressed[3]) {
+        if (pressed[3]) { //right
+            anim.SetBool("Right", true);
             rb.AddForce(hor * force * Phaser(rb.velocity, hor) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
-        if (pressed[0]) {
+        if (pressed[0]) { //up
+            anim.SetBool("Up", true);
             rb.AddForce(ver * force * Phaser(rb.velocity, ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
-        if (pressed[1]) {
+        if (pressed[1]) { //down          
+            anim.SetBool("Down", true);
             rb.AddForce(-ver * force * Phaser(rb.velocity, -ver) / Mathf.Sqrt(rb.velocity.magnitude + 0.01f));
         }
 
+        if (nothing)
+            anim.SetBool("Idle", true);
+
         age += (ageSpeed / Mathf.Log10(rb.velocity.magnitude + 2f)) * Time.deltaTime;
+        rb.freezeRotation = true;
 
-        if (!anim.GetBool(animLeftId) && !anim.GetBool(animRightId) && !anim.GetBool(animUpId) && !anim.GetBool(animDownId))
-            anim.SetBool(animIdleId, true);
-
+        /*
+        correcting = false;
+        float time_differential = Time.time - collision_time;
+        //if (rb.velocity != Vector2.zero && (time_differential) >= 3) {
+        if (rb.velocity != Vector2.zero && (time_differential) > 1.5) {
+            //transform.rotation = Quaternion.LookRotation(Vector3.forward, rb.velocity);
+            if (correcting) {
+                transform.Rotate((Vector3.forward * 5) / ((time_differential + (float)1.5) * (time_differential + (float)1.5)));
+                if ((Vector3)(rb.velocity / rb.velocity.magnitude) == transform.rotation * new Vector2(1,1)) {
+                    correcting = false;
+                    Debug.Log(0);
+                }
+            } else {
+                Vector3 vectorToTarget = rb.velocity - (Vector2)transform.forward;
+                float angle = Mathf.Atan2(-vectorToTarget.x, vectorToTarget.y) * Mathf.Rad2Deg;
+                Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+                transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 100);
+            }
+            
+        } else if (time_differential <= 1.5) {
+            transform.Rotate((Vector3.forward * 5) / ((time_differential + (float)1.5) * (time_differential + (float)1.5)));
+            correcting = true;
+        }
+        */
+        /*
+        float time_differential = Time.time - collision_time;
+        if (rb.velocity != Vector2.zero && (time_differential) > 1.5)
+        {
+            Vector3 vectorToTarget = rb.velocity - (Vector2)transform.forward;
+            float angle = Mathf.Atan2(-vectorToTarget.x, vectorToTarget.y) * Mathf.Rad2Deg;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, q, Time.deltaTime * 100);
+        }
+        else if (time_differential <= 1.5)
+        {
+            transform.Rotate((Vector3.forward * 5) / ((time_differential + (float)1.5) * (time_differential + (float)1.5)));
+        }
+        */
+        
         float timeDifferential = Time.time - collisionTime;
         Vector3 dir;
         float theta;
 
-        if (rb.velocity != Vector2.zero && (timeDifferential) > 3.5) {
+        if (rb.velocity != Vector2.zero) {
             Vector3 vectorToTarget = rb.velocity - (Vector2)transform.forward;
             float angle = Mathf.Atan2(-vectorToTarget.x, vectorToTarget.y) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -137,6 +159,7 @@ public class playerEngine : MonoBehaviour
             theta = Vector2.Angle(rb.velocity, dir);
             transform.Rotate(new Vector3(0,0,(float)(theta / (3.75 - timeDifferential)) * Time.deltaTime));
         }
+        
 
         hardCapSpeed();
 
@@ -180,9 +203,9 @@ public class playerEngine : MonoBehaviour
     float Phaser(Vector2 velocity, Vector2 newDirection)
     {
         Vector2 direction = velocity / velocity.magnitude;
-        float cosTheta = Vector2.Dot(direction, newDirection) / (direction.magnitude * newDirection.magnitude);
-        float theta = Mathf.Acos(cosTheta);
-        return 1 + 10 * Mathf.Sin(theta);
+        float cos_theta = Vector2.Dot(direction, newDirection) / (direction.magnitude * newDirection.magnitude);
+        float theta = Mathf.Acos(cos_theta);
+        return 1 + 40 * Mathf.Sin(theta); //CHANGE FOR DIFFERENT ROTATION ABILITY
     }
 
     public void OnCollisionEnter2D()
